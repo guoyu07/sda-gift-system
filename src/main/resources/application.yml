@@ -1,0 +1,11 @@
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://local:3306/discount_ticket_system
+        username: root
+        password: j987jklm
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+feiyou:
+    appid: 10186
+    appsecurity: 56e90e75bf8dd

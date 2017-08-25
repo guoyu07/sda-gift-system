@@ -5,7 +5,3 @@ spring:
         username: root
         password: j987jklm
         driver-class-name: com.mysql.jdbc.Driver
-logging:
-  file: gift.log
-  path: /var/log
-  level: debug

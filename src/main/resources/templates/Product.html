@@ -2,9 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>选择礼品</title>
+    <title>登录页</title>
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/static/vendors/angular/angular.min.js"></script>
 </head>
 <body>
+<div ng-controller="selectgoods">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">{{username}},欢迎您,祝您节日快乐!</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <ul class="list-group">
+            <a href="#" class="list-group-item active">
+                <!--<h4 class="list-group-item-heading">-->
+                <div class="row">
+                    <!--<div class="col-xs-2">-->
+                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                    <!--</div>-->
+                    <div class="col-xs-5 text-left">
+                        名称
+                    </div>
+                    <div class="col-xs-3 text-left">
+                        单价
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        数量
+                    </div>
+                </div>
+                <!--</h4>-->
+            </a>
+
+            <li class="list-group-item" ng-repeat="x in productArray">
+                <!--<div class="container">-->
+                <div class="row">
+                    <!--<div class="col-xs-2">-->
+                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                    <!--</div>-->
+                    <div class="col-xs-5 text-left">
+                        {{x.productName}}
+                    </div>
+                    <div class="col-xs-3 text-left">
+                        {{x.productPrice}}
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        <button type="button" class="btn btn-default btn-xs" ng-click="minusClick(x.indexNo)">-</button>
+                        <label>{{x.productNum}}</label>
+                        <button type="button" class="btn btn-default btn-xs" ng-click="plusClick(x.indexNo)">+</button>
+
+                    </div>
+                </div>
+                <!--</div>-->
+            </li>
+            <li class="list-group-item">
+                <!--<div class="container">-->
+                <div class="row">
+                    <!--<div class="col-xs-2">-->
+                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                    <!--</div>-->
+                    <div class="col-xs-6 text-left">
+                        请选择领取地点
+                    </div>
+
+                    <div class="col-xs-6 text-right">
+                        <select class="form-control" style="height: 2rem;padding: 0" ng-model="pickaddress">
+                            <option>济南</option>
+                            <option>青岛</option>
+                            <option>烟台</option>
+                            <option>厦门</option>
+                        </select>
+                    </div>
+                </div>
+                <!--</div>-->
+            </li>
+            <li class="list-group-item">
+                <!--<div class="container">-->
+                <div class="row">
+                    <!--<div class="col-xs-2">-->
+                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                    <!--</div>-->
+                    <div class="col-xs-6 text-left">
+                        请选择领取时间段
+                    </div>
+
+                    <div class="col-xs-6 text-right ">
+                        <select class="form-control" style="height: 2rem;padding: 0" ng-model="pickdate">
+                            <option>9月10日-20日</option>
+                            <option>9月20日-30日</option>
+                            <option>10月10日-20日</option>
+                            <option>10月20日-30日</option>
+                        </select>
+                    </div>
+                </div>
+                <!--</div>-->
+            </li>
+            <li class="list-group-item">
+                <!--<div class="container">-->
+                <div class="row">
+                    <!--<div class="col-xs-2">-->
+                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                    <!--</div>-->
+                    <div class="col-xs-6 text-left">
+                        总价
+                    </div>
+
+                    <div class="col-xs-6 text-right">
+                        {{totalPrice}}
+                    </div>
+                </div>
+                <!--</div>-->
+            </li>
+        </ul>
+
+        <button class="btn btn-warning btn-block btn-lg" ng-click="submit()" ng-disabled="isDisabled">提交</button>
+    </div>
+</div>
 
 </body>
 </html>

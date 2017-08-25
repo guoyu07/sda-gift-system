@@ -26,7 +26,7 @@ public class JwtTool {
     public static <T> String sign(T object, long maxAge) {
         try {
             final JWTSigner signer = new JWTSigner(SECRET);
-            final Map<String, Object> claims = new HashMap<String, Object>();
+            final Map<String, Object> claims = new HashMap<>();
             ObjectMapper mapper = new ObjectMapper();
             String jsonString = mapper.writeValueAsString(object);
             claims.put(PAYLOAD, jsonString);

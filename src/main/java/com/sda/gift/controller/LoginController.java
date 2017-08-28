@@ -1,6 +1,7 @@
 package com.sda.gift.controller;
 
 import com.sda.gift.entity.UserEntity;
+import com.sda.gift.exception.AuthenticationException;
 import com.sda.gift.framework.tool.JwtTool;
 import com.sda.gift.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,9 @@ public class LoginController {
     @PostMapping("/doLogin")
     public String doLogin(String userId, String password, HttpServletResponse response){
         UserEntity user = userService.checkAccount(userId, password);
+        if(null==user){
+            throw new AuthenticationException("用户认证失败！");
+        }
         String token = JwtTool.sign(user, 30L * 24L * 3600L * 1000L);
         Cookie tokenCookie = new Cookie("accessToken", token);
         tokenCookie.setMaxAge(20*60);

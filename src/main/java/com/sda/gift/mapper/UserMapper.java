@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    @Select("SELECT * FROM user WHERE user_id={#userId}")
+    @Select("SELECT * FROM user WHERE user_id=#{userId}")
     @Results({
             @Result(property = "userId",  column = "user_id"),
             @Result(property = "idNumber", column = "id_number"),

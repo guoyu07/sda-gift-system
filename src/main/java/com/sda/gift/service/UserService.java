@@ -16,7 +16,7 @@ public class UserService {
 
     public UserEntity checkAccount(String userId,String password){
         UserEntity user = userMapper.select(userId);
-        if(user.getIdNumber().substring(13).equalsIgnoreCase(password)){
+        if(user.getIdNumber().substring(12).equalsIgnoreCase(password)){
             return user;
         }
         return null;

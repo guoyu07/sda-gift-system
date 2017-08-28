@@ -18,7 +18,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         if(request.getServletPath().toLowerCase().contains("login")){
             return true;
         }
-        String jwtToken = CookieTool.getCookieValue(request,"token");
+        String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         if(StringUtils.isEmpty(jwtToken)){
             response.sendRedirect("/login");
             return false;

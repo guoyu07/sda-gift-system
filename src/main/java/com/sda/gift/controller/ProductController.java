@@ -2,6 +2,9 @@ package com.sda.gift.controller;
 
 import com.auth0.jwt.internal.org.bouncycastle.math.raw.Mod;
 import com.sda.gift.entity.ProductEntity;
+import com.sda.gift.entity.UserEntity;
+import com.sda.gift.framework.tool.CookieTool;
+import com.sda.gift.framework.tool.JwtTool;
 import com.sda.gift.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,9 +26,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/product")
-    public ModelAndView product(){
+    public ModelAndView product(HttpServletRequest request){
         List<ProductEntity> pros = productService.list();
         ModelAndView mv = new ModelAndView("product");
+        String jwtToken = CookieTool.getCookieValue(request,"accessToken");
+        UserEntity user = JwtTool.unsign(jwtToken,UserEntity.class);
+        mv.addObject("userName",user.getName());
         mv.addObject("productList",pros);
         return mv;
     }

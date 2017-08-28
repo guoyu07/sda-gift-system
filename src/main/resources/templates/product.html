@@ -11,7 +11,7 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">{{username}},欢迎您,祝您节日快乐!</a>
+                <h3 class="navbar-brand" href="#"><span th:text="${userName}"></span>,欢迎您,祝您节日快乐!</h3>
             </div>
         </div>
     </nav>
@@ -40,9 +40,9 @@
                             <span th:text="${product.ProPrice}"></span>
                         </div>
                         <div class="col-xs-4 text-right">
-                            <button type="button" class="btn btn-default btn-xs" >-</button>
-                            <span>0</span>
-                            <button type="button" class="btn btn-default btn-xs" >+</button>
+                            <button type="button" class="btn btn-default btn-sm" >-</button>
+                                <input type="text" style="border-width:0; width:20px; height:20px;" id="${product.ProId}" name="${product.ProPrice}"/>
+                            <button type="button" class="btn btn-default btn-sm" >+</button>
                         </div>
                     </div>
                 </li>

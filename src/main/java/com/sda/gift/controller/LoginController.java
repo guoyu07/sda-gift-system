@@ -39,6 +39,6 @@ public class LoginController {
         tokenCookie.setHttpOnly(true);
         tokenCookie.setPath("/");
         response.addCookie(tokenCookie);
-        return "product";
+        return "redirect:product";
     }
 }

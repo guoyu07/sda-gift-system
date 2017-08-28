@@ -1,5 +1,8 @@
 package com.sda.gift.service;
 
+import com.sda.gift.entity.UserEntity;
+import com.sda.gift.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -7,4 +10,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    public UserEntity checkAccount(String userId,String password){
+        UserEntity user = userMapper.select(userId);
+        if(user.getIdNumber().substring(13).equalsIgnoreCase(password)){
+            return user;
+        }
+        return null;
+    }
 }

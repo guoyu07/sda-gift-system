@@ -2,12 +2,14 @@ package com.sda.gift.mapper;
 
 import com.sda.gift.entity.ProductEntity;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Allen on 2017/8/25.
  */
+@Repository
 public interface ProductMapper {
     @Select("SELECT * FROM product")
     @Results({

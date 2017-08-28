@@ -18,11 +18,7 @@
     <div class="container">
         <ul class="list-group">
             <a href="#" class="list-group-item active">
-                <!--<h4 class="list-group-item-heading">-->
                 <div class="row">
-                    <!--<div class="col-xs-2">-->
-                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
-                    <!--</div>-->
                     <div class="col-xs-5 text-left">
                         名称
                     </div>
@@ -33,36 +29,27 @@
                         数量
                     </div>
                 </div>
-                <!--</h4>-->
             </a>
+            <th:block th:each="product:${productList}">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-5 text-left">
+                            <span th:text="${product.ProName}"></span>
+                        </div>
+                        <div class="col-xs-3 text-left">
+                            <span th:text="${product.ProPrice}"></span>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            <button type="button" class="btn btn-default btn-xs" >-</button>
+                            <span>0</span>
+                            <button type="button" class="btn btn-default btn-xs" >+</button>
+                        </div>
+                    </div>
+                </li>
+            </th:block>
 
             <li class="list-group-item">
-                <!--<div class="container">-->
                 <div class="row">
-                    <!--<div class="col-xs-2">-->
-                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
-                    <!--</div>-->
-                    <div class="col-xs-5 text-left">
-                        {{x.productName}}
-                    </div>
-                    <div class="col-xs-3 text-left">
-                        {{x.productPrice}}
-                    </div>
-                    <div class="col-xs-4 text-right">
-                        <button type="button" class="btn btn-default btn-xs" >-</button>
-                        <label>{{x.productNum}}</label>
-                        <button type="button" class="btn btn-default btn-xs" >+</button>
-
-                    </div>
-                </div>
-                <!--</div>-->
-            </li>
-            <li class="list-group-item">
-                <!--<div class="container">-->
-                <div class="row">
-                    <!--<div class="col-xs-2">-->
-                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
-                    <!--</div>-->
                     <div class="col-xs-6 text-left">
                         请选择领取地点
                     </div>
@@ -76,14 +63,9 @@
                         </select>
                     </div>
                 </div>
-                <!--</div>-->
             </li>
             <li class="list-group-item">
-                <!--<div class="container">-->
                 <div class="row">
-                    <!--<div class="col-xs-2">-->
-                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
-                    <!--</div>-->
                     <div class="col-xs-6 text-left">
                         请选择领取时间段
                     </div>
@@ -100,11 +82,7 @@
                 <!--</div>-->
             </li>
             <li class="list-group-item">
-                <!--<div class="container">-->
                 <div class="row">
-                    <!--<div class="col-xs-2">-->
-                    <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
-                    <!--</div>-->
                     <div class="col-xs-6 text-left">
                         总价
                     </div>
@@ -113,7 +91,6 @@
                         {{totalPrice}}
                     </div>
                 </div>
-                <!--</div>-->
             </li>
         </ul>
 

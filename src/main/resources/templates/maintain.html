@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>慰问品管理</title>
+    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
+    <!--<script src="bootstrap/js/modal.js"></script>-->
+    <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<div class="container">
+    <ul class="list-group">
+        <a href="#" class="list-group-item active">
+            <!--<h4 class="list-group-item-heading">-->
+            <div class="row">
+                <!--<div class="col-xs-2">-->
+                <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                <!--</div>-->
+                <div class="col-md-2 text-center">
+                    名称
+                </div>
+                <div class="col-md-2 text-center">
+                    单价
+                </div>
+                <div class="col-md-4 text-center">
+                    备注
+                </div>
+                <div class="col-md-1 text-center">
+                    状态
+                </div>
+                <div class="col-md-3 text-center">
+                    操作
+                </div>
+            </div>
+            <!--</h4>-->
+        </a>
+        <li class="list-group-item" style="font-size: 1.8rem;">
+            <!--<div class="container">-->
+            <div class="row">
+                <!--<div class="col-xs-2">-->
+                <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                <!--</div>-->
+                <div class="col-md-2 text-center text-nowrap">
+                    长城红酒
+                </div>
+                <div class="col-md-2 text-center">
+                    100
+                </div>
+                <div class="col-md-4 text-center text-justify">
+                    2017年中秋发放
+                </div>
+                <div class="col-md-1 text-center">
+                    启用
+                </div>
+                <div class="col-md-3 text-center text-nowrap">
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">编辑</button>
+                    <button class="btn btn-sm btn-primary">禁用/启用</button>
+
+                </div>
+            </div>
+            <!--</div>-->
+        </li>
+        <li class="list-group-item" style="font-size: 1.8rem;">
+            <!--<div class="container">-->
+            <div class="row">
+                <!--<div class="col-xs-2">-->
+                <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                <!--</div>-->
+                <div class="col-md-2 text-center text-nowrap">
+                    坚果礼盒
+                </div>
+                <div class="col-md-2 text-center">
+                    80
+                </div>
+                <div class="col-md-4 text-center text-justify">
+                    2017年中秋发放
+                </div>
+                <div class="col-md-1 text-center">
+                    启用
+                </div>
+                <div class="col-md-3 text-center text-nowrap">
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">编辑</button>
+                    <button class="btn btn-sm btn-primary">禁用/启用</button>
+
+                </div>
+            </div>
+            <!--</div>-->
+        </li>
+        <li class="list-group-item" style="font-size: 1.8rem;">
+            <!--<div class="container">-->
+            <div class="row">
+                <!--<div class="col-xs-2">-->
+                <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                <!--</div>-->
+                <div class="col-md-2 text-center text-nowrap">
+                    粗粮礼盒
+                </div>
+                <div class="col-md-2 text-center">
+                    60
+                </div>
+                <div class="col-md-4 text-center text-justify">
+                    2017年中秋发放
+                </div>
+                <div class="col-md-1 text-center">
+                    启用
+                </div>
+                <div class="col-md-3 text-center text-nowrap">
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">编辑</button>
+                    <button class="btn btn-sm btn-primary">禁用/启用</button>
+
+                </div>
+            </div>
+            <!--</div>-->
+        </li>
+        <li class="list-group-item" style="font-size: 1.8rem;">
+            <!--<div class="container">-->
+            <div class="row">
+                <!--<div class="col-xs-2">-->
+                <!--<img src="img/111.jpg" style="width: 1.5rem; height: 1.5rem">-->
+                <!--</div>-->
+                <div class="col-md-2 text-center text-nowrap">
+                    黑猪肉
+                </div>
+                <div class="col-md-2 text-center">
+                    200
+                </div>
+                <div class="col-md-4 text-center text-justify">
+                    2017年中秋发放
+                </div>
+                <div class="col-md-1 text-center">
+                    启用
+                </div>
+                <div class="col-md-3 text-center text-nowrap">
+                    <button class="btn btn-sm btn-primary">编辑</button>
+                    <button class="btn btn-sm btn-primary">禁用/启用</button>
+
+                </div>
+            </div>
+            <!--</div>-->
+        </li>
+        <a href="#" class="list-group-item active">
+            <!--<h4 class="list-group-item-heading">-->
+            <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#myModal">添加物品</button>
+            <button class="btn btn-sm btn-default">导出订单</button>
+
+            <!--</h4>-->
+        </a>
+
+    </ul>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        物品管理
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>名称</label>
+                            <input type="text" class="form-control" placeholder="文本输入"/>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <label>价格</label>
+                            <input type="text" class="form-control" placeholder="文本输入"/>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <label>备注</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <br/>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1"/> 启用
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"/> 禁用
+                        </label>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+
+
+</body>
+</html>

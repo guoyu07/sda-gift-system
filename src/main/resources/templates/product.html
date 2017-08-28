@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorate="layout">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <!--<script type="text/javascript" th:src="/vendors/angular/angular.min.js"></script>-->
-    <!--<script type="text/javascript" th:src="/vendors/angular-route/angular-route.min.js"></script>-->
-    <!--<script type="text/javascript" th:src="/js/app.js"></script>-->
-    <!--<script type="text/javascript" th:src="/js/login.js"></script>-->
-    <!--<script type="text/javascript" th:src="/js/selectgoods.js"></script>-->
-    <!--<script type="text/javascript" th:src="/js/layer/layer.js"></script>-->
-    <!--<link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>-->
-    <title>登录</title>
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
+    <title>产品列表</title>
 </head>
 <body>
-<div ng-controller="selectgoods">
+<div>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -44,7 +36,7 @@
                 <!--</h4>-->
             </a>
 
-            <li class="list-group-item" ng-repeat="x in productArray">
+            <li class="list-group-item">
                 <!--<div class="container">-->
                 <div class="row">
                     <!--<div class="col-xs-2">-->
@@ -57,9 +49,9 @@
                         {{x.productPrice}}
                     </div>
                     <div class="col-xs-4 text-right">
-                        <button type="button" class="btn btn-default btn-xs" ng-click="minusClick(x.indexNo)">-</button>
+                        <button type="button" class="btn btn-default btn-xs" >-</button>
                         <label>{{x.productNum}}</label>
-                        <button type="button" class="btn btn-default btn-xs" ng-click="plusClick(x.indexNo)">+</button>
+                        <button type="button" class="btn btn-default btn-xs" >+</button>
 
                     </div>
                 </div>
@@ -76,7 +68,7 @@
                     </div>
 
                     <div class="col-xs-6 text-right">
-                        <select class="form-control" style="height: 2rem;padding: 0" ng-model="pickaddress">
+                        <select class="form-control" style="height: 2rem;padding: 0">
                             <option>济南</option>
                             <option>青岛</option>
                             <option>烟台</option>
@@ -97,7 +89,7 @@
                     </div>
 
                     <div class="col-xs-6 text-right ">
-                        <select class="form-control" style="height: 2rem;padding: 0" ng-model="pickdate">
+                        <select class="form-control" style="height: 2rem;padding: 0">
                             <option>9月10日-20日</option>
                             <option>9月20日-30日</option>
                             <option>10月10日-20日</option>
@@ -125,7 +117,7 @@
             </li>
         </ul>
 
-        <button class="btn btn-warning btn-block btn-lg" ng-click="submit()" ng-disabled="isDisabled">提交</button>
+        <button class="btn btn-warning btn-block btn-lg">提交</button>
     </div>
 </div>
 

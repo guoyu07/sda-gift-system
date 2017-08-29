@@ -125,7 +125,7 @@
         $(obj).next().val(--num);
         var totalPrice = $("#totalPrice").val();
         var price = $(obj).val();
-        totalPrice = totalPrice*1 + price*1;
+        totalPrice = totalPrice*1 - price*1;
         $("#totalPrice").val(totalPrice)
     }
 </script>

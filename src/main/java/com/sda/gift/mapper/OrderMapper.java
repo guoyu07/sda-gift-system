@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderMapper {
     @Insert("INSERT INTO order (guid,user_id,pro_id,pro_name,pro_num,place,take_time,total_price,activity_name)" +
-            " VALUES (#{guid},#{userId},#{proId},#{proName},#{proNum},#{place},#{takeTime},#{totalPrice},#{activityName})")
+            " VALUES (#{guid},#{userId},#{proId},#{proName},#{proNum},#{takePlace},#{takeTime},#{totalPrice},#{activityName})")
     void insert(OrderEntity order);
 
     @Delete("DELETE FROM order WHERE user_id=#{userId} AND activity_name=#{activityName}")

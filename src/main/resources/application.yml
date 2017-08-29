@@ -1,4 +1,5 @@
-
+gift:
+    activityName: "中秋活动"
 spring:
     datasource:
         url: jdbc:mysql://localhost:3306/sda_gift

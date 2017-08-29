@@ -6,6 +6,7 @@ import com.sda.gift.entity.UserEntity;
 import com.sda.gift.framework.tool.CookieTool;
 import com.sda.gift.framework.tool.GuidGenerator;
 import com.sda.gift.framework.tool.JwtTool;
+import com.sda.gift.service.OrderService;
 import com.sda.gift.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +35,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private OrderService orderService;
     private String userId;
     @Value("${gift.activityName}")
     private String activityName;
@@ -55,7 +58,7 @@ public class ProductController {
         List<OrderEntity> odrList = new ArrayList<>();
         String takePlace = request.getParameter("takePlace");
         String takeTime = request.getParameter("takeTime");
-        BigDecimal totalPrice = new BigDecimal(request.getParameter("totalPrice"));
+        String totalPrice = request.getParameter("totalPrice");
 
         for (ProductEntity pro:pros) {
             String proNum = request.getParameter(pro.getProId());
@@ -68,10 +71,7 @@ public class ProductController {
                         proNum, takePlace, takeTime, totalPrice,activityName);
                 odrList.add(orderEntity);
             }
-
         }
-
-
+        orderService.saveOrder(odrList);
     }
-
 }

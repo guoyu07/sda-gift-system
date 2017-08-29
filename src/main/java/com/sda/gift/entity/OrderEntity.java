@@ -20,6 +20,6 @@ public class OrderEntity {
     private String proNum;
     private String takePlace;
     private String takeTime;
-    private BigDecimal totalPrice;
+    private String totalPrice;
     private String activityName;
 }

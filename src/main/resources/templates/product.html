@@ -3,7 +3,16 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
+    <script th:src="@{/vendors/jquery/dist/jquery.js}"></script>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
+    <style>
+        .price{
+            border-width:0;
+            width:20px;
+            height:20px;
+            text-align: center;
+        }
+    </style>
     <title>产品列表</title>
 </head>
 <body>
@@ -11,7 +20,8 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <h3 class="navbar-brand" href="#"><span th:text="${userName}"></span>,欢迎您,祝您节日快乐!</h3>
+                <h3 class="navbar-brand" href="#">
+                <span th:text="${userName}"></span>,欢迎您,祝您节日快乐!</h3>
             </div>
         </div>
     </nav>
@@ -30,73 +40,93 @@
                     </div>
                 </div>
             </a>
-            <th:block th:each="product:${productList}">
+            <form action="/chooseProduct">
+                <th:block th:each="product:${productList}">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-5 text-left">
+                                <span th:text="${product.ProName}"></span>
+                            </div>
+                            <div class="col-xs-3 text-left">
+                                <span th:text="${product.ProPrice}"></span>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="minus($(this))">-</button>
+                                <input type="text" class="price"  th:id="${product.proId}" th:name="${product.proId}" value="0"/>
+                                <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="add($(this))">+</button>
+                            </div>
+                        </div>
+                    </li>
+                </th:block>
+
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-5 text-left">
-                            <span th:text="${product.ProName}"></span>
+                        <div class="col-xs-6 text-left">
+                            请选择领取地点
                         </div>
-                        <div class="col-xs-3 text-left">
-                            <span th:text="${product.ProPrice}"></span>
-                        </div>
-                        <div class="col-xs-4 text-right">
-                            <button type="button" class="btn btn-default btn-sm" >-</button>
-                                <input type="text" style="border-width:0; width:20px; height:20px;" id="${product.ProId}" name="${product.ProPrice}"/>
-                            <button type="button" class="btn btn-default btn-sm" >+</button>
+
+                        <div class="col-xs-6 text-right">
+                            <select class="form-control" style="height: 2rem;padding: 0">
+                                <option>济南</option>
+                                <option>青岛</option>
+                                <option>烟台</option>
+                                <option>厦门</option>
+                            </select>
                         </div>
                     </div>
                 </li>
-            </th:block>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6 text-left">
+                            请选择领取时间段
+                        </div>
 
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6 text-left">
-                        请选择领取地点
+                        <div class="col-xs-6 text-right ">
+                            <select class="form-control" style="height: 2rem;padding: 0">
+                                <option>9月10日-20日</option>
+                                <option>9月20日-30日</option>
+                                <option>10月10日-20日</option>
+                                <option>10月20日-30日</option>
+                            </select>
+                        </div>
                     </div>
+                    <!--</div>-->
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6 text-left">
+                            总价
+                        </div>
 
-                    <div class="col-xs-6 text-right">
-                        <select class="form-control" style="height: 2rem;padding: 0">
-                            <option>济南</option>
-                            <option>青岛</option>
-                            <option>烟台</option>
-                            <option>厦门</option>
-                        </select>
+                        <div class="col-xs-6 text-right">
+                            <input type="text" style="border-width: 0;width: 70px" id="totalPrice" name="totalPrice"/>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6 text-left">
-                        请选择领取时间段
-                    </div>
-
-                    <div class="col-xs-6 text-right ">
-                        <select class="form-control" style="height: 2rem;padding: 0">
-                            <option>9月10日-20日</option>
-                            <option>9月20日-30日</option>
-                            <option>10月10日-20日</option>
-                            <option>10月20日-30日</option>
-                        </select>
-                    </div>
-                </div>
-                <!--</div>-->
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6 text-left">
-                        总价
-                    </div>
-
-                    <div class="col-xs-6 text-right">
-                        {{totalPrice}}
-                    </div>
-                </div>
-            </li>
+                </li>
+        <button class="btn btn-warning btn-block btn-lg">提交</button></form>
         </ul>
-
-        <button class="btn btn-warning btn-block btn-lg">提交</button>
     </div>
 </div>
-
 </body>
+<script type="text/javascript">
+    function add (obj) {
+        var num = $(obj).prev().val();
+        $(obj).prev().val(++num);
+        var totalPrice = $("#totalPrice").val();
+        var price = $(obj).val();
+        totalPrice = totalPrice*1 + price*1;
+        $("#totalPrice").val(totalPrice)
+    }
+    function minus (obj) {
+        var num = $(obj).next().val();
+        if(num==0){
+            return;
+        }
+        $(obj).next().val(--num);
+        var totalPrice = $("#totalPrice").val();
+        var price = $(obj).val();
+        totalPrice = totalPrice*1 + price*1;
+        $("#totalPrice").val(totalPrice)
+    }
+</script>
 </html>

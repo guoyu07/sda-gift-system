@@ -24,4 +24,8 @@ public class ProductService {
     public void add(ProductEntity productEntity){
         productMapper.insert(productEntity);
     }
+
+    public void save(ProductEntity productEntity){
+        productMapper.update(productEntity);
+    }
 }

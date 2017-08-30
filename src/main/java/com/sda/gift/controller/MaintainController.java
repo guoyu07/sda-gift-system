@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,4 +42,13 @@ public class MaintainController {
         productService.add(productEntity);
         return "添加成功";
     }
+
+    @PutMapping("/product")
+    @ResponseBody
+    public String saveProduct(ProductEntity productEntity){
+        productService.save(productEntity);
+        return "添加成功";
+    }
+
+
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>慰问品管理</title>
-    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+    <script th:src="@{/vendors/jquery/dist/jquery.js}"></script>
     <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
 </head>
@@ -74,24 +74,25 @@
                     <form role="form" id="editForm">
                         <div class="form-group">
                             <label>名称</label>
-                            <input type="text" id="proEditName" name="proEditName" class="form-control" placeholder="文本输入"/>
+                            <input type="hidden" id="proEditGuid" name="proGuid" class="form-control" placeholder="文本输入"/>
+                            <input type="text" id="proEditName" name="proName" class="form-control" placeholder="文本输入"/>
                         </div>
                         <br/>
                         <div class="form-group">
                             <label>价格</label>
-                            <input type="text" id="proEditPrice" name="proEditPrice" class="form-control" placeholder="文本输入"/>
+                            <input type="text" id="proEditPrice" name="proPrice" class="form-control" placeholder="文本输入"/>
                         </div>
                         <br/>
                         <div class="form-group">
                             <label>备注</label>
-                            <textarea  id="proEditDescription" name="proEditDescription" class="form-control" rows="3"></textarea>
+                            <textarea  id="proEditDescription" name="proDescription" class="form-control" rows="3"></textarea>
                         </div>
                         <br/>
                         <label class="radio-inline">
-                            <input type="radio" name="editAvailable"  value="0"/> 启用
+                            <input type="radio" name="available"  value="0"/> 启用
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="editAvailable"  value="1"/> 禁用
+                            <input type="radio" name="available"  value="1"/> 禁用
                         </label>
                     </form>
                 </div>
@@ -121,24 +122,24 @@
                     <form role="form" id="addForm">
                         <div class="form-group">
                             <label>名称</label>
-                            <input type="text" id="proAddName" name="proAddName" class="form-control" placeholder="文本输入"/>
+                            <input type="text" id="proAddName" name="proName" class="form-control" placeholder="文本输入"/>
                         </div>
                         <br/>
                         <div class="form-group">
                             <label>价格</label>
-                            <input type="text" id="proAddPrice" name="proAddPrice" class="form-control" placeholder="文本输入"/>
+                            <input type="text" id="proAddPrice" name="proPrice" class="form-control" placeholder="文本输入"/>
                         </div>
                         <br/>
                         <div class="form-group">
                             <label>备注</label>
-                            <textarea  id="proAddDescription" name="proAddDescription" class="form-control" rows="3"></textarea>
+                            <textarea  id="proAddDescription" name="proDescription" class="form-control" rows="3"></textarea>
                         </div>
                         <br/>
                         <label class="radio-inline">
-                            <input type="radio" name="addAvailable"  value="0"/> 启用
+                            <input type="radio" name="available"  value="0"/> 启用
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="addAvailable"  value="1"/> 禁用
+                            <input type="radio" name="available"  value="1"/> 禁用
                         </label>
                     </form>
                 </div>
@@ -162,6 +163,7 @@
         var proMap = [[${productMap}]];
         var product = proMap[proId];
 
+        $("#proEditGuid").val(product["guid"]);
         $("#proEditName").val(product["proName"]);
         $("#proEditPrice").val(product["proPrice"]);
         $("#proEditDescription").val(product["proDescription"]);
@@ -174,14 +176,14 @@
     /*]]>*/
 
     function saveProduct() {
-        var formData = $('#productForm').serialize();
-        $.post('/product', formData, function(response) {
+        var formData = $('#editForm').serialize();
+        $.put('/product', formData, function(response) {
             console.log(response);
         });
     }
 
     function addProduct() {
-        var formData = $('#productForm').serialize();
+        var formData = $('#addForm').serialize();
         $.post('/product', formData, function(response) {
             console.log(response);
         });

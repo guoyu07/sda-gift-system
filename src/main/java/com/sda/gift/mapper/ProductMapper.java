@@ -25,7 +25,7 @@ public interface ProductMapper {
             " VALUES (#{guid},#{proName},#{proId},#{proUrl},#{proDescription},#{proPrice},#{available})")
     void insert(ProductEntity product);
 
-    @Update("UPDATE product SET pro_name=#{proName}, pro_id=#{proId},pro_url=#{proUrl},pro_description=#{proDescription},pro_price=#{proPrice},available=#{available}")
+    @Update("UPDATE product SET pro_name=#{proName}, pro_id=#{proId},pro_url=#{proUrl},pro_description=#{proDescription},pro_price=#{proPrice},available=#{available} WHERE guid=#{guid}")
     void update(ProductEntity product);
 
 }

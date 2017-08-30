@@ -24,12 +24,5 @@ public interface OrderMapper {
 
     @InsertProvider(type=OrderProvider.class,method = "insertAll")
     void insertAll(@Param("list") List<OrderEntity> list);
-//@Insert({"<script>",
-//        "INSERT INTO  order (guid,user_id,pro_id,pro_name,pro_num,take_place,take_time,total_price,activity_name) VALUES ",
-//        "<foreach collection='list' item='order' separator = ',' >" +
-//                "(#{order.guid},#{order.userId},#{order.proId},#{order.proName},#{order.proNum},#{order.takePlace},#{order.takeTime},#{order.totalPrice},#{order.activityName})" +
-//                "</foreach>",
-//        "</script>"})
-//void insertAll(List<OrderEntity> orderEntities);
 
 }

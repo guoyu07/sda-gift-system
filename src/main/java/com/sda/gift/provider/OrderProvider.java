@@ -15,9 +15,9 @@ public class OrderProvider {
         List<OrderEntity> orderEntities = (List<OrderEntity>)map.get("list");
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO `order`");
-        sb.append("(guid,user_id,pro_id,pro_name,pro_num,take_place,take_time,total_price) ");
+        sb.append("(guid,user_id,pro_id,pro_name,pro_num,take_place,take_time,total_price,activity_name) ");
         sb.append(" VALUES ");
-        MessageFormat mf = new MessageFormat("(#'{'list[{0}].guid},#'{'list[{0}].userId},#'{'list[{0}].proId},#'{'list[{0}].proName},#'{'list[{0}].proNum},#'{'list[{0}].takePlace},#'{'list[{0}].takeTime},#'{'list[{0}].totalPrice})");
+        MessageFormat mf = new MessageFormat("(#'{'list[{0}].guid},#'{'list[{0}].userId},#'{'list[{0}].proId},#'{'list[{0}].proName},#'{'list[{0}].proNum},#'{'list[{0}].takePlace},#'{'list[{0}].takeTime},#'{'list[{0}].totalPrice},#'{'list[{0}].activityName})");
         for(int i = 0 ;i<orderEntities.size();i++) {
             sb.append(mf.format(new Object[]{i}));
             if (i < orderEntities.size() - 1) {

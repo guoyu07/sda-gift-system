@@ -19,4 +19,9 @@ public class ProductService {
     public List<ProductEntity> list(){
         return productMapper.getAll();
     }
+
+
+    public void add(ProductEntity productEntity){
+        productMapper.insert(productEntity);
+    }
 }

@@ -23,6 +23,10 @@ public class OrderService {
         orderMapper.insertAll(orderEntities);
     }
 
+    public void addOrder(List<OrderEntity> orderEntities){
+        orderMapper.insertAll(orderEntities);
+    }
+
     public List<OrderEntity> getOrder(String userId){
         return orderMapper.query(userId);
     }

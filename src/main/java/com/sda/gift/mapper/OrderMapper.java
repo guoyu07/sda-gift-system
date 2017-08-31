@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
 
-    @Select("SELECT * FROM order WHERE user_id=#{userId}")
+    @Select("SELECT * FROM `order` WHERE user_id=#{userId}")
     @Results({
             @Result(property = "userId",  column = "user_id"),
             @Result(property = "proName",  column = "pro_name"),

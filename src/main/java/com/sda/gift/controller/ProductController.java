@@ -3,6 +3,7 @@ package com.sda.gift.controller;
 import com.sda.gift.entity.OrderEntity;
 import com.sda.gift.entity.ProductEntity;
 import com.sda.gift.entity.UserEntity;
+import com.sda.gift.framework.cache.CacheManager;
 import com.sda.gift.framework.common.RestResult;
 import com.sda.gift.framework.tool.CookieTool;
 import com.sda.gift.framework.tool.GuidGenerator;
@@ -34,7 +35,7 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private OrderService orderService;
-    private String userId;
+
     @Value("${gift.activityName}")
     private String activityName;
 
@@ -42,10 +43,9 @@ public class ProductController {
     public ModelAndView product(HttpServletRequest request){
         ModelAndView mv = new ModelAndView("product");
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
-        UserEntity user = JwtTool.unsign(jwtToken,UserEntity.class);
-        userId = user.getUserId();
+        UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.list();
-        List<OrderEntity> odrs = orderService.getOrder(userId);
+        List<OrderEntity> odrs = orderService.getOrder(user.getUserId());
         if(odrs.size()>0){
             for (OrderEntity order:odrs) {
                 ProductEntity pro = pros.stream().filter(c->c.getProId().equalsIgnoreCase(order.getProId())).findFirst().get();
@@ -60,6 +60,8 @@ public class ProductController {
     @PostMapping("/chooseProduct")
     @ResponseBody
     public RestResult chooseProduct(HttpServletRequest request){
+        String jwtToken = CookieTool.getCookieValue(request,"accessToken");
+        UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.list();
         List<OrderEntity> odrList = new ArrayList<>();
         String takePlace = request.getParameter("takePlace");
@@ -67,18 +69,18 @@ public class ProductController {
         String totalPrice = request.getParameter("totalPrice");
 
         for (ProductEntity pro:pros) {
-            String proNum = request.getParameter(pro.getProId());
-            if(!StringUtils.isEmpty(proNum)&&!proNum.trim().equalsIgnoreCase("0")){
+            int proNum = Integer.parseInt(request.getParameter(pro.getProId()));
+            if(proNum > 0){
                 OrderEntity orderEntity = new OrderEntity(
                         GuidGenerator.newGuid(),
-                        userId,
+                        user.getUserId(),
                         pro.getProId(),
                         pro.getProName(),
                         proNum, takePlace, takeTime, totalPrice,activityName);
                 odrList.add(orderEntity);
             }
         }
-        orderService.saveOrder(odrList,userId,activityName);
+        orderService.addOrder(odrList);
         return new RestResult(true,"礼品选择成功",null,null);
     }
 }

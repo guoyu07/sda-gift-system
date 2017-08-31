@@ -13,6 +13,6 @@ public class ProductEntity {
     private String proUrl;
     private String proDescription;
     private String proPrice;
-    private String proNum;
+    private int proNum;
     private int available;
 }

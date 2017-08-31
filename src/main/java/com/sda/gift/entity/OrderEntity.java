@@ -17,7 +17,7 @@ public class OrderEntity {
     private String userId;
     private String proId;
     private String proName;
-    private String proNum;
+    private int proNum;
     private String takePlace;
     private String takeTime;
     private String totalPrice;

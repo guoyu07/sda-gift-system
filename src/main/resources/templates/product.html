@@ -25,8 +25,12 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <h3 class="navbar-brand" href="#">
-                <span th:text="${userName}"></span>,欢迎您,祝您节日快乐!</h3>
+                <h3 th:if="${isChoosed}" class="navbar-brand">
+                        <span  th:text="${userName}"></span>,欢迎您,祝您节日快乐，您可以重新选择礼品!
+                </h3>
+                <h3 th:unless="${isChoosed}" class="navbar-brand">
+                        <span  th:text="${userName}"></span>,欢迎您,祝您节日快乐!
+                </h3>
             </div>
         </div>
     </nav>
@@ -57,7 +61,7 @@
                             </div>
                             <div class="col-xs-4 text-right">
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="minus($(this))">-</button>
-                                <input type="text" class="price"  th:id="${product.proId}" th:name="${product.proId}" th:value="0"/>
+                                <input type="text" class="price"  th:id="${product.proId}" th:name="${product.proId}" th:value="${product.proNum}"/>
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="add($(this))">+</button>
                             </div>
                         </div>

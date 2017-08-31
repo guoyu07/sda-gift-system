@@ -36,19 +36,17 @@ public class MaintainController {
         return mv;
     }
 
-    @PostMapping("/product")
+    @PostMapping("/addProduct")
     @ResponseBody
     public String addProduct(ProductEntity productEntity){
         productService.add(productEntity);
         return "添加成功";
     }
 
-    @PutMapping("/product")
+    @PostMapping("/saveProduct")
     @ResponseBody
     public String saveProduct(ProductEntity productEntity){
         productService.save(productEntity);
         return "添加成功";
     }
-
-
 }

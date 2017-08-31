@@ -1,6 +1,7 @@
 package com.sda.gift.service;
 
 import com.sda.gift.entity.ProductEntity;
+import com.sda.gift.framework.tool.GuidGenerator;
 import com.sda.gift.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class ProductService {
 
 
     public void add(ProductEntity productEntity){
+        productEntity.setGuid(GuidGenerator.newGuid());
         productMapper.insert(productEntity);
     }
 

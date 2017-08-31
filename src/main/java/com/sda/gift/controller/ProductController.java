@@ -51,6 +51,10 @@ public class ProductController {
                 ProductEntity pro = pros.stream().filter(c->c.getProId().equalsIgnoreCase(order.getProId())).findFirst().get();
                 pro.setProNum(order.getProNum());
             }
+            OrderEntity orderEntity = odrs.get(0);
+            mv.addObject("takePlace",orderEntity.getTakePlace());
+            mv.addObject("takeTime",orderEntity.getTakeTime());
+            mv.addObject("totalPrice",orderEntity.getTotalPrice());
             mv.addObject("isChosed",true);
         }
         mv.addObject("userName",user.getName());

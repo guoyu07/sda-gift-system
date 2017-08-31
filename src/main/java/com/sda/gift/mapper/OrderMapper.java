@@ -19,7 +19,8 @@ public interface OrderMapper {
             @Result(property = "proName",  column = "pro_name"),
             @Result(property = "proId", column = "pro_id"),
             @Result(property = "proNum", column = "pro_num"),
-            @Result(property = "takePlace", column = "tale_place"),
+            @Result(property = "takePlace", column = "take_place"),
+            @Result(property = "takeTime", column = "take_time"),
             @Result(property = "totalPrice", column = "total_price"),
             @Result(property = "activityName", column = "activity_name")
     })

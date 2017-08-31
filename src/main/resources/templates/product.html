@@ -8,6 +8,7 @@
     <script th:src="@{/vendors/pnotify/dist/pnotify.js}"></script>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/vendors/pnotify/dist/pnotify.css}"/>
+    <link rel="stylesheet" th:href="@{/vendors/pnotify/dist/pnotify.brighttheme.css}"/>
 
     <style>
         .price{
@@ -56,7 +57,7 @@
                             </div>
                             <div class="col-xs-4 text-right">
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="minus($(this))">-</button>
-                                <input type="text" class="price"  th:id="${product.proId}" th:name="${product.proId}" value="0"/>
+                                <input type="text" class="price"  th:id="${product.proId}" th:name="${product.proId}" th:value="0"/>
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="add($(this))">+</button>
                             </div>
                         </div>
@@ -107,7 +108,7 @@
                         </div>
                     </div>
                 </li>
-                <input type="button" onclick="chooseProduct()" th:text="提交" class="btn btn-warning btn-block btn-lg"/>
+                <input type="button" onclick="chooseProduct()" value="提交" class="btn btn-warning btn-block btn-lg"/>
             </form>
         </ul>
     </div>
@@ -138,10 +139,9 @@
         $.post('/product/chooseProduct',formData,function (response) {
             if(response.success==true){
                 new PNotify({
-                    title: '成功',
+                    title: '恭喜您',
                     text: response.message,
-                    type: 'success',
-                    styling: 'bootstrap3'
+                    type: 'success'
                 });
             }
         });

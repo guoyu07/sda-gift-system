@@ -2,10 +2,7 @@ package com.sda.gift.mapper;
 
 import com.sda.gift.entity.OrderEntity;
 import com.sda.gift.provider.OrderProvider;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +12,19 @@ import java.util.List;
  */
 @Repository
 public interface OrderMapper {
+
+    @Select("SELECT * FROM order WHERE user_id=#{userId}")
+    @Results({
+            @Result(property = "userId",  column = "user_id"),
+            @Result(property = "proName",  column = "pro_name"),
+            @Result(property = "proId", column = "pro_id"),
+            @Result(property = "proNum", column = "pro_num"),
+            @Result(property = "takePlace", column = "tale_place"),
+            @Result(property = "totalPrice", column = "total_price"),
+            @Result(property = "activityName", column = "activity_name")
+    })
+    List<OrderEntity> query(String userId);
+
     @Insert("INSERT INTO order (guid,user_id,pro_id,pro_name,pro_num,take_place,take_time,total_price,activity_name)" +
             " VALUES (#{guid},#{userId},#{proId},#{proName},#{proNum},#{takePlace},#{takeTime},#{totalPrice},#{activityName})")
     void insert(OrderEntity order);

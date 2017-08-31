@@ -6,9 +6,7 @@
     <title>慰问品管理</title>
     <script th:src="@{/vendors/jquery/dist/jquery.js}"></script>
     <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
-    <script th:src="@{/vendors/pnotify/dist/pnotify.js}"></script>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/vendors/pnotify/dist/pnotify.css}"/>
 </head>
 <body>
 <div class="container">
@@ -101,9 +99,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="saveProduct()">
-                        保存
-                    </button>
+                    <input type="button" class="btn btn-primary" onclick="saveProduct()"/>
                 </div>
             </div>
         </div>
@@ -148,9 +144,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="addProduct()">
-                        添加
-                    </button>
+                    <input value="添加" type="button" class="btn btn-primary" onclick="addProduct()"/>
                 </div>
             </div>
         </div>
@@ -180,15 +174,6 @@
     function saveProduct() {
         var formData = $('#editForm').serialize();
         $.post('/maintain/saveProduct', formData, function(response) {
-
-            if(response.success==true){
-                new PNotify({
-                    title: '成功',
-                    text: response.message,
-                    type: 'info',
-                    styling: 'bootstrap3'
-                });
-            }
             window.location.reload()
         });
     }
@@ -196,14 +181,6 @@
     function addProduct() {
         var formData = $('#addForm').serialize();
         $.post('/maintain/addProduct', formData, function(response) {
-            if(response.success==true){
-                new PNotify({
-                    title: '成功',
-                    text: response.message,
-                    type: 'info',
-                    styling: 'bootstrap3'
-                });
-            }
             window.location.reload()
         });
     }

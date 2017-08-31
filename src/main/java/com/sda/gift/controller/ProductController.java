@@ -71,6 +71,6 @@ public class ProductController {
             }
         }
         orderService.saveOrder(odrList);
-        return new RestResult(true,"提交成功",null,null);
+        return new RestResult(true,"礼品选择成功",null,null);
     }
 }

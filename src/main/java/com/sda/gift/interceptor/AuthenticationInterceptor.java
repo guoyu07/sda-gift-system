@@ -29,12 +29,17 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         if(user.getUserId().equalsIgnoreCase("admin")){
-            if(request.getServletPath().toLowerCase().contains("maintain")){
+            if(request.getServletPath().toLowerCase().contains("/maintain/")){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if(request.getServletPath().toLowerCase().contains("/product/")){
                 return true;
             }else{
                 return false;
             }
         }
-        return true;
     }
 }

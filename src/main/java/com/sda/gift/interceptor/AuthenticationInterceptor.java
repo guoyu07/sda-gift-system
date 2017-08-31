@@ -20,13 +20,20 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         }
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         if(StringUtils.isEmpty(jwtToken)){
-            response.sendRedirect("/login");
+            response.sendRedirect("/login/");
             return false;
         }
         UserEntity user = JwtTool.unsign(jwtToken,UserEntity.class);
         if(null == user){
-            response.sendRedirect("/login");
+            response.sendRedirect("/login/");
             return false;
+        }
+        if(user.getUserId().equalsIgnoreCase("admin")){
+            if(request.getServletPath().toLowerCase().contains("maintain")){
+                return true;
+            }else{
+                return false;
+            }
         }
         return true;
     }

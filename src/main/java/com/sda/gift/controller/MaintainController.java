@@ -4,10 +4,7 @@ import com.sda.gift.entity.ProductEntity;
 import com.sda.gift.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -18,12 +15,13 @@ import java.util.Map;
  * Created by Allen on 2017/8/24.
  */
 @Controller
+@RequestMapping("/maintain")
 public class MaintainController {
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/maintain")
+    @GetMapping("/")
     public ModelAndView maintain(){
         ModelAndView mv = new ModelAndView("maintain");
         List<ProductEntity> productList = productService.list();

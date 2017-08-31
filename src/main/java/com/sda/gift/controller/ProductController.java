@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Allen on 2017/8/24.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class ProductController {
     @Value("${gift.activityName}")
     private String activityName;
 
-    @GetMapping("/product")
+    @GetMapping("/")
     public ModelAndView product(HttpServletRequest request){
         List<ProductEntity> pros = productService.list();
         ModelAndView mv = new ModelAndView("product");

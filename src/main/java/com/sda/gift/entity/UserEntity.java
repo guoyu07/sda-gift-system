@@ -1,11 +1,15 @@
 package com.sda.gift.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by Allen on 2017/8/24.
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
     private String guid;
     private String name;
@@ -13,4 +17,8 @@ public class UserEntity {
     private String idNumber;
     private String department;
     private String company;
+
+    public UserEntity(String userId) {
+        this.userId = userId;
+    }
 }

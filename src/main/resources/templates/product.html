@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </a>
-            <form action="/chooseProduct" method="post">
+            <form id="productForm">
                 <th:block th:each="product:${productList}">
                     <li class="list-group-item">
                         <div class="row">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </li>
-                <input type="submit" class="btn btn-warning btn-block btn-lg"/>
+                <button onclick="chooseProduct()" class="btn btn-warning btn-block btn-lg"/>
             </form>
         </ul>
     </div>
@@ -128,6 +128,12 @@
         var price = $(obj).val();
         totalPrice = totalPrice*1 - price*1;
         $("#totalPrice").val(totalPrice)
+    }
+    function choooseProduct() {
+        var formData = $("#productForm").serialize();
+        $.post("/product/chooseproduct",formData,function (response) {
+            console.log(response);
+        })
     }
 </script>
 </html>

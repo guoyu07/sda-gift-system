@@ -40,11 +40,19 @@ public class ProductController {
 
     @GetMapping("/")
     public ModelAndView product(HttpServletRequest request){
-        List<ProductEntity> pros = productService.list();
         ModelAndView mv = new ModelAndView("product");
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         UserEntity user = JwtTool.unsign(jwtToken,UserEntity.class);
         userId = user.getUserId();
+        List<ProductEntity> pros = productService.list();
+        List<OrderEntity> odrs = orderService.getOrder(userId);
+        if(odrs.size()>0){
+            for (OrderEntity order:odrs) {
+                ProductEntity pro = pros.stream().filter(c->c.getProId().equalsIgnoreCase(order.getProId())).findFirst().get();
+                pro.setProNum(order.getProNum());
+            }
+            mv.addObject("isChosed",true);
+        }
         mv.addObject("userName",user.getName());
         mv.addObject("productList",pros);
         return mv;
@@ -70,7 +78,7 @@ public class ProductController {
                 odrList.add(orderEntity);
             }
         }
-        orderService.saveOrder(odrList);
+        orderService.saveOrder(odrList,userId,activityName);
         return new RestResult(true,"礼品选择成功",null,null);
     }
 }

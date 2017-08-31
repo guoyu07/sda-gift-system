@@ -4,6 +4,7 @@ import com.sda.gift.entity.OrderEntity;
 import com.sda.gift.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +17,9 @@ public class OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
-    public void saveOrder(List<OrderEntity> orderEntities){
+    @Transactional
+    public void saveOrder(List<OrderEntity> orderEntities, String userId, String activityName){
+        orderMapper.delete(userId,activityName);
         orderMapper.insertAll(orderEntities);
     }
 

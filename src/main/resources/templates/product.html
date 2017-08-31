@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </li>
-                <button onclick="chooseProduct()" class="btn btn-warning btn-block btn-lg"/>
+                <button onclick="chooseProduct()" class="btn btn-warning btn-block btn-lg">提交</button>
             </form>
         </ul>
     </div>
@@ -127,11 +127,11 @@
         var totalPrice = $("#totalPrice").val();
         var price = $(obj).val();
         totalPrice = totalPrice*1 - price*1;
-        $("#totalPrice").val(totalPrice)
+        $("#totalPrice").val(totalPrice);
     }
-    function choooseProduct() {
+    function chooseProduct() {
         var formData = $("#productForm").serialize();
-        $.post("/product/chooseproduct",formData,function (response) {
+        $.post('/product/chooseProduct',formData,function (response) {
             console.log(response);
         })
     }

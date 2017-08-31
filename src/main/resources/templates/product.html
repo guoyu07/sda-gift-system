@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8"/>
     <script th:src="@{/vendors/jquery/dist/jquery.js}"></script>
+    <script th:src="@{/js/jquery.serializejson.js}"></script>
+    <script th:src="@{/vendors/pnotify/dist/pnotify.js}"></script>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/vendors/pnotify/dist/pnotify.css}"/>
+
     <style>
         .price{
             border-width:0;
@@ -103,7 +107,7 @@
                         </div>
                     </div>
                 </li>
-                <button onclick="chooseProduct()" class="btn btn-warning btn-block btn-lg">提交</button>
+                <input type="button" onclick="chooseProduct()" th:text="提交" class="btn btn-warning btn-block btn-lg"/>
             </form>
         </ul>
     </div>
@@ -132,8 +136,15 @@
     function chooseProduct() {
         var formData = $("#productForm").serialize();
         $.post('/product/chooseProduct',formData,function (response) {
-            console.log(response);
-        })
+            if(response.success==true){
+                new PNotify({
+                    title: '成功',
+                    text: response.message,
+                    type: 'success',
+                    styling: 'bootstrap3'
+                });
+            }
+        });
     }
 </script>
 </html>

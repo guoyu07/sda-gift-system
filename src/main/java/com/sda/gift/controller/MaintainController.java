@@ -1,6 +1,7 @@
 package com.sda.gift.controller;
 
 import com.sda.gift.entity.ProductEntity;
+import com.sda.gift.framework.common.RestResult;
 import com.sda.gift.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,15 +37,15 @@ public class MaintainController {
 
     @PostMapping("/addProduct")
     @ResponseBody
-    public String addProduct(ProductEntity productEntity){
+    public RestResult addProduct(ProductEntity productEntity){
         productService.add(productEntity);
-        return "添加成功";
+        return new RestResult(true,"添加产品成功",null,null);
     }
 
     @PostMapping("/saveProduct")
     @ResponseBody
-    public String saveProduct(ProductEntity productEntity){
+    public RestResult saveProduct(ProductEntity productEntity){
         productService.save(productEntity);
-        return "添加成功";
+        return new RestResult(true,"更新成功",null,null);
     }
 }

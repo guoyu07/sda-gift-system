@@ -6,7 +6,9 @@
     <title>慰问品管理</title>
     <script th:src="@{/vendors/jquery/dist/jquery.js}"></script>
     <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <script th:src="@{/vendors/pnotify/dist/pnotify.js}"></script>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/vendors/pnotify/dist/pnotify.css}"/>
 </head>
 <body>
 <div class="container">
@@ -178,7 +180,15 @@
     function saveProduct() {
         var formData = $('#editForm').serialize();
         $.post('/maintain/saveProduct', formData, function(response) {
-            console.log(response);
+
+            if(response.success==true){
+                new PNotify({
+                    title: '成功',
+                    text: response.message,
+                    type: 'info',
+                    styling: 'bootstrap3'
+                });
+            }
             window.location.reload()
         });
     }
@@ -186,7 +196,14 @@
     function addProduct() {
         var formData = $('#addForm').serialize();
         $.post('/maintain/addProduct', formData, function(response) {
-            console.log(response);
+            if(response.success==true){
+                new PNotify({
+                    title: '成功',
+                    text: response.message,
+                    type: 'info',
+                    styling: 'bootstrap3'
+                });
+            }
             window.location.reload()
         });
     }

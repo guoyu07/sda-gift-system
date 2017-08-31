@@ -3,6 +3,7 @@ package com.sda.gift.controller;
 import com.sda.gift.entity.OrderEntity;
 import com.sda.gift.entity.ProductEntity;
 import com.sda.gift.entity.UserEntity;
+import com.sda.gift.framework.common.RestResult;
 import com.sda.gift.framework.tool.CookieTool;
 import com.sda.gift.framework.tool.GuidGenerator;
 import com.sda.gift.framework.tool.JwtTool;
@@ -50,7 +51,7 @@ public class ProductController {
     }
     @PostMapping("/chooseProduct")
     @ResponseBody
-    public void chooseProduct(HttpServletRequest request){
+    public RestResult chooseProduct(HttpServletRequest request){
         List<ProductEntity> pros = productService.list();
         List<OrderEntity> odrList = new ArrayList<>();
         String takePlace = request.getParameter("takePlace");
@@ -70,5 +71,6 @@ public class ProductController {
             }
         }
         orderService.saveOrder(odrList);
+        return new RestResult(true,"提交成功",null,null);
     }
 }

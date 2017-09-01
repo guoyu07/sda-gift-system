@@ -34,6 +34,6 @@ public interface OrderMapper {
     void delete(String userId,String activityName );
 
     @InsertProvider(type=OrderProvider.class,method = "insertAll")
-    void insertAll(@Param("list") List<OrderEntity> list);
+    void insertAll(@Param("getAll") List<OrderEntity> list);
 
 }

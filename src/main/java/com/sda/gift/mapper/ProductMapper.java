@@ -21,6 +21,16 @@ public interface ProductMapper {
     })
     List<ProductEntity> getAll();
 
+    @Select("SELECT * FROM product WHERE available=0")
+    @Results({
+            @Result(property = "proName",  column = "pro_name"),
+            @Result(property = "proId", column = "pro_id"),
+            @Result(property = "proUrl", column = "pro_url"),
+            @Result(property = "proDescription", column = "pro_description"),
+            @Result(property = "proPrice", column = "pro_price")
+    })
+    List<ProductEntity> getAllAvailable();
+
     @Insert("INSERT INTO product(guid,pro_name,pro_id,pro_url,pro_description,pro_price,available)" +
             " VALUES (#{guid},#{proName},#{proId},#{proUrl},#{proDescription},#{proPrice},#{available})")
     void insert(ProductEntity product);

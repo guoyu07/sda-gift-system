@@ -17,8 +17,12 @@ public class ProductService {
     @Autowired
     private ProductMapper productMapper;
 
-    public List<ProductEntity> list(){
+    public List<ProductEntity> getAll(){
         return productMapper.getAll();
+    }
+
+    public List<ProductEntity> getAllAvailable(){
+        return productMapper.getAllAvailable();
     }
 
 

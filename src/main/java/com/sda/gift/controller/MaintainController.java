@@ -25,7 +25,7 @@ public class MaintainController {
     @GetMapping("/")
     public ModelAndView maintain(){
         ModelAndView mv = new ModelAndView("maintain");
-        List<ProductEntity> productList = productService.list();
+        List<ProductEntity> productList = productService.getAll();
         Map<String,ProductEntity> productMap = new HashMap<>();
         for (ProductEntity product:productList) {
             productMap.put(product.getGuid(),product);

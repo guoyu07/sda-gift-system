@@ -7,13 +7,11 @@ import com.sda.gift.framework.cache.CacheManager;
 import com.sda.gift.framework.common.RestResult;
 import com.sda.gift.framework.tool.CookieTool;
 import com.sda.gift.framework.tool.GuidGenerator;
-import com.sda.gift.framework.tool.JwtTool;
 import com.sda.gift.service.OrderService;
 import com.sda.gift.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +42,7 @@ public class ProductController {
         ModelAndView mv = new ModelAndView("product");
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
-        List<ProductEntity> pros = productService.list();
+        List<ProductEntity> pros = productService.getAllAvailable();
         List<OrderEntity> odrs = orderService.getOrder(user.getUserId());
         if(odrs.size()>0){
             for (OrderEntity order:odrs) {
@@ -66,7 +64,7 @@ public class ProductController {
     public RestResult chooseProduct(HttpServletRequest request){
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
-        List<ProductEntity> pros = productService.list();
+        List<ProductEntity> pros = productService.getAllAvailable();
         List<OrderEntity> odrList = new ArrayList<>();
         String takePlace = request.getParameter("takePlace");
         String takeTime = request.getParameter("takeTime");

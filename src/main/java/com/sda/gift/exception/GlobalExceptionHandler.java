@@ -16,20 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final String DEFAULT_ERROR_VIEW = "error";
-
-    @ExceptionHandler(value = AuthenticationException.class)
-    @ResponseBody
-    public RestResult restErrorHandler(HttpServletRequest request, Exception e) throws Exception{
-        return new RestResult(false,e.getMessage(),null,null);
-    }
-
     @ExceptionHandler(value = Exception.class)
-    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", e);
-        mav.setViewName(DEFAULT_ERROR_VIEW);
-        return mav;
+    @ResponseBody
+    public RestResult defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+        return new RestResult(false,e.getMessage(),null,null);
     }
 
 }

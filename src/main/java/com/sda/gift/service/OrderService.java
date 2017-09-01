@@ -23,11 +23,6 @@ public class OrderService {
         List<OrderEntity> oldOrders = orderMapper.query(userId,activityName);
         if(oldOrders.size()>0){
             orderMapper.delete(userId,activityName);
-            try {
-                int exception = 1/0;
-            }catch (Exception e){
-                throw new AuthenticationException("认证错误");
-            }
         }
         orderMapper.insertAll(orderEntities);
     }

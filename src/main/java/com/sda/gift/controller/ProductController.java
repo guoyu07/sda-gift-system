@@ -43,7 +43,7 @@ public class ProductController {
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.getAllAvailable();
-        List<OrderEntity> odrs = orderService.getOrder(user.getUserId());
+        List<OrderEntity> odrs = orderService.getOrder(user.getUserId(),activityName);
         if(odrs.size()>0){
             for (OrderEntity order:odrs) {
                 ProductEntity pro = pros.stream().filter(c->c.getProId().equalsIgnoreCase(order.getProId())).findFirst().get();

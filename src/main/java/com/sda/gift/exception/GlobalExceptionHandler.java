@@ -4,6 +4,8 @@ import com.sda.gift.framework.common.RestResult;
 import com.sun.deploy.net.HttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,12 @@ public class GlobalExceptionHandler {
 
     private static final String DEFAULT_ERROR_VIEW = "error";
 
+    @ExceptionHandler(value = AuthenticationException.class)
+    @ResponseBody
+    public RestResult restErrorHandler(HttpServletRequest request, Exception e) throws Exception{
+        return new RestResult(false,e.getMessage(),null,null);
+    }
+
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         ModelAndView mav = new ModelAndView();
@@ -24,8 +32,4 @@ public class GlobalExceptionHandler {
         return mav;
     }
 
-    @ExceptionHandler(value = AuthenticationException.class)
-    public RestResult restErrorHandler(HttpServletRequest request, Exception e) throws Exception{
-        return new RestResult(false,e.getMessage(),null,null);
-    }
 }

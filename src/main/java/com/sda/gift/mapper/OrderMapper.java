@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
 
-    @Select("SELECT * FROM `order` WHERE user_id=#{userId}")
+    @Select("SELECT * FROM `order` WHERE user_id=#{userId} AND activity_name=#{activityName}")
     @Results({
             @Result(property = "userId",  column = "user_id"),
             @Result(property = "proName",  column = "pro_name"),
@@ -24,14 +24,14 @@ public interface OrderMapper {
             @Result(property = "totalPrice", column = "total_price"),
             @Result(property = "activityName", column = "activity_name")
     })
-    List<OrderEntity> query(String userId);
+    List<OrderEntity> query(@Param("userId") String userId,@Param("activityName") String activityName);
 
     @Insert("INSERT INTO order (guid,user_id,pro_id,pro_name,pro_num,take_place,take_time,total_price,activity_name)" +
             " VALUES (#{guid},#{userId},#{proId},#{proName},#{proNum},#{takePlace},#{takeTime},#{totalPrice},#{activityName})")
     void insert(OrderEntity order);
 
-    @Delete("DELETE FROM order WHERE user_id=#{userId} AND activity_name=#{activityName}")
-    void delete(String userId,String activityName );
+    @Delete("DELETE FROM `order`WHERE user_id=#{userId} AND activity_name =#{activityName};")
+    void delete(@Param("userId") String userId,@Param("activityName") String activityName );
 
     @InsertProvider(type=OrderProvider.class,method = "insertAll")
     void insertAll(@Param("getAll") List<OrderEntity> list);

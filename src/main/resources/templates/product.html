@@ -153,6 +153,12 @@
                     text: response.message,
                     type: 'success'
                 });
+            }else{
+                new PNotify({
+                    title: '对不起',
+                    text: response.message,
+                    type: 'error'
+                });
             }
         });
     }

@@ -20,16 +20,19 @@ public class OrderService {
 
     @Transactional
     public void saveOrder(List<OrderEntity> orderEntities, String userId, String activityName){
-        List<OrderEntity> oldOrders = orderMapper.query(userId);
+        List<OrderEntity> oldOrders = orderMapper.query(userId,activityName);
         if(oldOrders.size()>0){
             orderMapper.delete(userId,activityName);
-            int exception = 1/0;
-            System.out.print(exception);
+            try {
+                int exception = 1/0;
+            }catch (Exception e){
+                throw new AuthenticationException("认证错误");
+            }
         }
         orderMapper.insertAll(orderEntities);
     }
 
-    public List<OrderEntity> getOrder(String userId){
-        return orderMapper.query(userId);
+    public List<OrderEntity> getOrder(String userId, String activityName){
+        return orderMapper.query(userId,activityName);
     }
 }

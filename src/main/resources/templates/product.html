@@ -2,7 +2,9 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <script th:src="@{/vendors/jquery/dist/jquery.js}"></script>
     <script th:src="@{/js/jquery.serializejson.js}"></script>
     <script th:src="@{/vendors/pnotify/dist/pnotify.js}"></script>
@@ -26,15 +28,15 @@
         <div class="container">
             <div class="navbar-header">
                 <h3 th:if="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,欢迎您,祝您节日快乐，您可以重新选择礼品!
+                        <span  th:text="${userName}"></span>,祝您节日快乐，您可以重新选择礼品!
                 </h3>
                 <h3 th:unless="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,欢迎您,祝您节日快乐!
+                        <span  th:text="${userName}"></span>,祝您节日快乐!
                 </h3>
             </div>
         </div>
     </nav>
-    <div class="container" style="width: 100%">
+    <div class="container">
         <ul class="list-group">
             <div class="list-group-item active">
                 <div class="row">
@@ -56,10 +58,10 @@
                             <div class="col-xs-5 text-left">
                                 <span th:text="${product.ProName}"></span>
                             </div>
-                            <div class="col-xs-3 text-left">
+                            <div class="col-xs-2 text-left">
                                 <span th:text="${product.ProPrice}"></span>
                             </div>
-                            <div class="col-xs-4 text-right">
+                            <div class="col-xs-5 text-right">
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="minus($(this))">-</button>
                                 <input type="text" class="price"  th:id="${product.proId}" th:name="${product.proId}" th:value="${product.proNum}"/>
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="add($(this))">+</button>
@@ -108,7 +110,7 @@
                         </div>
 
                         <div class="col-xs-6 text-right">
-                            <input type="text" style="border-width: 0;width: 70px" id="totalPrice" name="totalPrice" th:value="${totalPrice}"/>
+                            <input type="text" style="border-width: 0;width: 20px" id="totalPrice" name="totalPrice" th:value="${totalPrice}"/>
                         </div>
                     </div>
                 </li>
@@ -156,7 +158,7 @@
             }else{
                 new PNotify({
                     title: '对不起',
-                    text: response.message,
+                    text: re,
                     type: 'error'
                 });
             }

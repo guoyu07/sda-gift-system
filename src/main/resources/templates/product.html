@@ -28,10 +28,10 @@
         <div class="container">
             <div class="navbar-header">
                 <h3 th:if="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,<span  th:text="${activityname}"></span>快乐，您可以重新选择礼品!
+                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐，您可以重新选择礼品!
                 </h3>
                 <h3 th:unless="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,<span  th:text="${activityname}"></span>快乐!
+                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐!
                 </h3>
             </div>
         </div>
@@ -46,7 +46,7 @@
                     <div class="col-xs-3 text-left">
                         单价
                     </div>
-                    <div class="col-xs-4 text-right">
+                    <div class="col-xs-4 text-center">
                         数量
                     </div>
                 </div>

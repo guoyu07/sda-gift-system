@@ -28,10 +28,10 @@
         <div class="container">
             <div class="navbar-header">
                 <h3 th:if="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,祝您节日快乐，您可以重新选择礼品!
+                        <span  th:text="${userName}"></span>,<span  th:text="${activityname}"></span>快乐，您可以重新选择礼品!
                 </h3>
                 <h3 th:unless="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,祝您节日快乐!
+                        <span  th:text="${userName}"></span>,<span  th:text="${activityname}"></span>快乐!
                 </h3>
             </div>
         </div>
@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="col-xs-6 text-right">
-                            <input type="text" style="border-width: 0;width: 20px" id="totalPrice" name="totalPrice" th:value="${totalPrice}"/>
+                            <input type="text" style="border-width: 0;width: 60px" id="totalPrice" name="totalPrice" th:value="${totalPrice}"/>
                         </div>
                     </div>
                 </li>

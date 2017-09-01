@@ -56,6 +56,7 @@ public class ProductController {
             mv.addObject("isChosed",true);
         }
         mv.addObject("userName",user.getName());
+        mv.addObject("activityName",activityName);
         mv.addObject("productList",pros);
         return mv;
     }

@@ -141,7 +141,12 @@
     }
     function chooseProduct() {
         var formData = $("#productForm").serialize();
-        $.post('/product/chooseProduct',formData,function (response) {
+
+
+        $.post('/product/chooseProduct',formData,function (response, status,request) {
+            if (request.getResponseHeader('ACCESS') === '1') {
+                window.location = '/login/';
+            }
             if(response.success==true){
                 new PNotify({
                     title: '恭喜您',

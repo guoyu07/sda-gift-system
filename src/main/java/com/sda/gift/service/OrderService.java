@@ -1,6 +1,7 @@
 package com.sda.gift.service;
 
 import com.sda.gift.entity.OrderEntity;
+import com.sda.gift.exception.AuthenticationException;
 import com.sda.gift.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,12 @@ public class OrderService {
 
     @Transactional
     public void saveOrder(List<OrderEntity> orderEntities, String userId, String activityName){
-        orderMapper.delete(userId,activityName);
-        orderMapper.insertAll(orderEntities);
-    }
-
-    public void addOrder(List<OrderEntity> orderEntities){
+        List<OrderEntity> oldOrders = orderMapper.query(userId);
+        if(oldOrders.size()>0){
+            orderMapper.delete(userId,activityName);
+            int exception = 1/0;
+            System.out.print(exception);
+        }
         orderMapper.insertAll(orderEntities);
     }
 

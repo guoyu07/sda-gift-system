@@ -21,8 +21,13 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
+        String requestType = request.getHeader("X-Requested-With");
         if(StringUtils.isEmpty(jwtToken)){
-            response.sendRedirect("/login/");
+            if(requestType!=null && requestType.equalsIgnoreCase("XMLHttpRequest")){
+                response.addHeader("ACCESS","1");
+            }else{
+                response.sendRedirect("/login/");
+            }
             return false;
         }
         UserEntity user = JwtTool.unsign(jwtToken,UserEntity.class);

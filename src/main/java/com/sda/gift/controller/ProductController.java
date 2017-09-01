@@ -62,13 +62,14 @@ public class ProductController {
     @PostMapping("/chooseProduct")
     @ResponseBody
     public RestResult chooseProduct(HttpServletRequest request){
+
+        String takePlace = request.getParameter("takePlace");
+        String takeTime = request.getParameter("takeTime");
+        String totalPrice = request.getParameter("totalPrice");
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.getAllAvailable();
         List<OrderEntity> odrList = new ArrayList<>();
-        String takePlace = request.getParameter("takePlace");
-        String takeTime = request.getParameter("takeTime");
-        String totalPrice = request.getParameter("totalPrice");
 
         for (ProductEntity pro:pros) {
             int proNum = Integer.parseInt(request.getParameter(pro.getProId()));
@@ -82,7 +83,7 @@ public class ProductController {
                 odrList.add(orderEntity);
             }
         }
-        orderService.addOrder(odrList);
+        orderService.saveOrder(odrList,user.getUserId(),activityName);
         return new RestResult(true,"礼品选择成功",null,null);
     }
 }

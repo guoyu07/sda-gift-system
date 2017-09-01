@@ -1,7 +1,6 @@
 package com.sda.gift.service;
 
 import com.sda.gift.entity.OrderEntity;
-import com.sda.gift.exception.AuthenticationException;
 import com.sda.gift.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,6 @@
 package com.sda.gift.interceptor;
 
 import com.sda.gift.entity.UserEntity;
-import com.sda.gift.framework.cache.Cache;
 import com.sda.gift.framework.cache.CacheManager;
 import com.sda.gift.framework.tool.CookieTool;
 import com.sda.gift.framework.tool.JwtTool;

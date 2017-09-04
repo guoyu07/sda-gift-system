@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class GiftConfig {
     private String activityName;
+    private int quota;
 }

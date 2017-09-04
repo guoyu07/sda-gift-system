@@ -28,6 +28,7 @@ public class ProductService {
 
     public void add(ProductEntity productEntity){
         productEntity.setGuid(GuidGenerator.newGuid());
+        productEntity.setProId(productEntity.getGuid());
         productMapper.insert(productEntity);
     }
 

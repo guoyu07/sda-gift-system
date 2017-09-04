@@ -2,6 +2,8 @@ package com.sda.gift.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Allen on 2017/8/24.
  */
@@ -12,7 +14,7 @@ public class ProductEntity {
     private String proId;
     private String proUrl;
     private String proDescription;
-    private String proPrice;
+    private BigDecimal proPrice;
     private int proNum;
     private int available;
 }

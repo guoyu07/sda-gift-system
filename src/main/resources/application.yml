@@ -4,6 +4,7 @@ gift:
 spring:
   profiles:
     active: "dev"
+  
 
 logging:
   file: gift.log
@@ -12,3 +13,4 @@ logging:
       mybatis: TRACE
       springframework: INFO
       com.sda.gift: TRACE
+      com.sda.gift.mapper: DEBUG

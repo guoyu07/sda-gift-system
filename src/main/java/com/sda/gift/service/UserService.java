@@ -1,7 +1,7 @@
 package com.sda.gift.service;
 
-import com.sda.gift.entity.UserEntity;
-import com.sda.gift.mapper.UserMapper;
+import com.sda.gift.model.entity.UserEntity;
+import com.sda.gift.dao.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

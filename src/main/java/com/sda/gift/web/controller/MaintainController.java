@@ -1,6 +1,6 @@
-package com.sda.gift.controller;
+package com.sda.gift.web.controller;
 
-import com.sda.gift.entity.ProductEntity;
+import com.sda.gift.model.entity.ProductEntity;
 import com.sda.gift.framework.common.RestResult;
 import com.sda.gift.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

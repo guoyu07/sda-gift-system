@@ -1,10 +1,9 @@
-package com.sda.gift.controller;
+package com.sda.gift.web.controller;
 
-import com.sda.gift.entity.OrderEntity;
-import com.sda.gift.entity.ProductEntity;
-import com.sda.gift.entity.UserEntity;
-import com.sda.gift.exception.AuthenticationException;
-import com.sda.gift.exception.PriceException;
+import com.sda.gift.model.entity.OrderEntity;
+import com.sda.gift.model.entity.ProductEntity;
+import com.sda.gift.model.entity.UserEntity;
+import com.sda.gift.web.exception.PriceException;
 import com.sda.gift.framework.cache.CacheManager;
 import com.sda.gift.framework.common.RestResult;
 import com.sda.gift.framework.tool.CookieTool;
@@ -22,9 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

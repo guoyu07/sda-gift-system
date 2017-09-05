@@ -1,4 +1,4 @@
-package com.sda.gift.exception;
+package com.sda.gift.web.exception;
 
 /**
  * Created by lenovo on 2017/7/5.

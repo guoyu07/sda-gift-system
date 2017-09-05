@@ -1,4 +1,4 @@
-package com.sda.gift.interceptor;
+package com.sda.gift.web.interceptor;
 
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.XSlf4j;

@@ -1,7 +1,7 @@
 package com.sda.gift.config;
 
-import com.sda.gift.interceptor.AuthenticationInterceptor;
-import com.sda.gift.interceptor.LoggingInterceptor;
+import com.sda.gift.web.interceptor.AuthenticationInterceptor;
+import com.sda.gift.web.interceptor.LoggingInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -4,8 +4,5 @@ spring:
         username: root
         password: j987jklm
         driver-class-name: com.mysql.jdbc.Driver
-        initialSize: 5
-        druid:
-          min-idle:
 server:
   port: 8090

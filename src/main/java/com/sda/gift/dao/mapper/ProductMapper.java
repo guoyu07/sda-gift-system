@@ -1,6 +1,6 @@
-package com.sda.gift.mapper;
+package com.sda.gift.dao.mapper;
 
-import com.sda.gift.entity.ProductEntity;
+import com.sda.gift.model.entity.ProductEntity;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

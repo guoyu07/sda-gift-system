@@ -1,4 +1,4 @@
-package com.sda.gift.entity;
+package com.sda.gift.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

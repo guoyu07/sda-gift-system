@@ -1,4 +1,4 @@
-package com.sda.gift.exception;
+package com.sda.gift.web.exception;
 
 import com.sda.gift.framework.common.RestResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;

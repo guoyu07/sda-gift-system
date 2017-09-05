@@ -1,6 +1,6 @@
-package com.sda.gift.mapper;
+package com.sda.gift.dao.mapper;
 
-import com.sda.gift.entity.UserEntity;
+import com.sda.gift.model.entity.UserEntity;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;

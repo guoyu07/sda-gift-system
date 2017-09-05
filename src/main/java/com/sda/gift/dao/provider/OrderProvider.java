@@ -1,6 +1,6 @@
-package com.sda.gift.provider;
+package com.sda.gift.dao.provider;
 
-import com.sda.gift.entity.OrderEntity;
+import com.sda.gift.model.entity.OrderEntity;
 
 import java.text.MessageFormat;
 import java.util.List;

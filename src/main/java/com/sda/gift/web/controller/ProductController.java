@@ -47,17 +47,20 @@ public class ProductController {
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.getAllAvailable();
         List<OrderEntity> odrs = orderService.getOrder(user.getUserId(),activityName);
+        BigDecimal totalPrice = BigDecimal.ZERO;
         if(odrs.size()>0){
             for (OrderEntity order:odrs) {
                 ProductEntity pro = pros.stream().filter(c->c.getProId().equalsIgnoreCase(order.getProId())).findFirst().get();
                 pro.setProNum(order.getProNum());
             }
             OrderEntity orderEntity = odrs.get(0);
+            totalPrice = totalPrice.add(orderEntity.getTotalPrice());
             mv.addObject("takePlace",orderEntity.getTakePlace());
             mv.addObject("takeTime",orderEntity.getTakeTime());
-            mv.addObject("totalPrice",orderEntity.getTotalPrice());
+
             mv.addObject("isChosed",true);
         }
+        mv.addObject("totalPrice",totalPrice);
         mv.addObject("userName",user.getName());
         mv.addObject("quota",quota);
         mv.addObject("activityName",activityName);
@@ -95,7 +98,7 @@ public class ProductController {
     private void checkPrice(List<OrderEntity> orderEntities, BigDecimal totalPrice){
         BigDecimal addResult = BigDecimal.ZERO;
         for (OrderEntity odr: orderEntities) {
-            addResult.add(odr.getTotalPrice());
+            addResult = addResult.add(odr.getTotalPrice());
         }
         if(addResult.compareTo(totalPrice)!=0){
             throw new PriceException("金额有误，请不要搞鬼！");

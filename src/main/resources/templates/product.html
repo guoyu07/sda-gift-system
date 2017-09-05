@@ -28,10 +28,10 @@
         <div class="container">
             <div class="navbar-header">
                 <h3 th:if="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐，您可以重新选择额度不超过<span th:text="${quota}"></span>的礼品!
+                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐，您可以重新选择额度不超过<span th:text="${quota}"></span>元的礼品!
                 </h3>
                 <h3 th:unless="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐,请选择额度不超过<span  th:text="${quota}"></span>的礼品!
+                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐,请选择额度不超过<span  th:text="${quota}"></span>元的礼品!
                 </h3>
             </div>
         </div>
@@ -121,7 +121,8 @@
     </div>
 </div>
 </body>
-<script type="text/javascript">
+<script type="text/javascript"  th:inline="javascript">
+    /*<![CDATA[*/
     function add (obj) {
         var num = $(obj).prev().val();
         $(obj).prev().val(++num);
@@ -141,18 +142,18 @@
         totalPrice = totalPrice*1 - price*1;
         $("#totalPrice").val(totalPrice);
     }
-    /*<![CDATA[*/
+
     function chooseProduct() {
         var quota = [[${quota}]];
         var totalPrice = $("#totalPrice").val()
-        if(totalPrice>quota){
-            new PNotify({
-                title: '对不起',
-                text: "不能超出额度"+quota,
-                type: 'error'
-            });
-            return false;
-        }
+//        if(Number(totalPrice)>Number(quota)){
+//            new PNotify({
+//                title: '对不起',
+//                text: "不能超出额度"+quota,
+//                type: 'error'
+//            });
+//            return false;
+//        }
         var formData = $("#productForm").serialize();
         $.post('/product/chooseProduct',formData,function (response, status,request) {
             if (request.getResponseHeader('ACCESS') === '1') {

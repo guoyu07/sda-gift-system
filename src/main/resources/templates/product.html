@@ -150,7 +150,8 @@
             new PNotify({
                 title: '对不起',
                 text: "不能超出额度"+quota,
-                type: 'error'
+                type: 'error',
+                styling: 'bootstrap3'
             });
             return false;
         }
@@ -163,13 +164,15 @@
                 new PNotify({
                     title: '恭喜您',
                     text: response.message,
-                    type: 'success'
+                    type: 'success',
+                    styling: 'bootstrap3'
                 });
             }else{
                 new PNotify({
                     title: '对不起',
                     text: response.message,
-                    type: 'error'
+                    type: 'error',
+                    styling: 'bootstrap3'
                 });
             }
         });

@@ -146,14 +146,14 @@
     function chooseProduct() {
         var quota = [[${quota}]];
         var totalPrice = $("#totalPrice").val()
-//        if(Number(totalPrice)>Number(quota)){
-//            new PNotify({
-//                title: '对不起',
-//                text: "不能超出额度"+quota,
-//                type: 'error'
-//            });
-//            return false;
-//        }
+        if(Number(totalPrice)>Number(quota)){
+            new PNotify({
+                title: '对不起',
+                text: "不能超出额度"+quota,
+                type: 'error'
+            });
+            return false;
+        }
         var formData = $("#productForm").serialize();
         $.post('/product/chooseProduct',formData,function (response, status,request) {
             if (request.getResponseHeader('ACCESS') === '1') {

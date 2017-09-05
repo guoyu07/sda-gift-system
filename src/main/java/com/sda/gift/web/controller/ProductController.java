@@ -49,15 +49,14 @@ public class ProductController {
         List<OrderEntity> odrs = orderService.getOrder(user.getUserId(),activityName);
         BigDecimal totalPrice = BigDecimal.ZERO;
         if(odrs.size()>0){
+            OrderEntity orderEntity = odrs.get(0);
             for (OrderEntity order:odrs) {
                 ProductEntity pro = pros.stream().filter(c->c.getProId().equalsIgnoreCase(order.getProId())).findFirst().get();
                 pro.setProNum(order.getProNum());
+                totalPrice = totalPrice.add(order.getTotalPrice());
             }
-            OrderEntity orderEntity = odrs.get(0);
-            totalPrice = totalPrice.add(orderEntity.getTotalPrice());
             mv.addObject("takePlace",orderEntity.getTakePlace());
             mv.addObject("takeTime",orderEntity.getTakeTime());
-
             mv.addObject("isChosed",true);
         }
         mv.addObject("totalPrice",totalPrice);

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class OrderProvider {
 
-    public String insertAll(Map map){
+    public String insertList(Map map){
         List<OrderEntity> orderEntities = (List<OrderEntity>)map.get("getAll");
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO `order`");

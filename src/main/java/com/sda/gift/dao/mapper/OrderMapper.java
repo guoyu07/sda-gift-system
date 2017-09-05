@@ -26,6 +26,19 @@ public interface OrderMapper {
     })
     List<OrderEntity> query(@Param("userId") String userId,@Param("activityName") String activityName);
 
+    @Select("SELECT * FROM `order`")
+    @Results({
+            @Result(property = "userId",  column = "user_id"),
+            @Result(property = "proName",  column = "pro_name"),
+            @Result(property = "proId", column = "pro_id"),
+            @Result(property = "proNum", column = "pro_num"),
+            @Result(property = "takePlace", column = "take_place"),
+            @Result(property = "takeTime", column = "take_time"),
+            @Result(property = "totalPrice", column = "total_price"),
+            @Result(property = "activityName", column = "activity_name")
+    })
+    List<OrderEntity> queryAll();
+
     @Insert("INSERT INTO order (guid,user_id,pro_id,pro_name,pro_num,take_place,take_time,total_price,activity_name)" +
             " VALUES (#{guid},#{userId},#{proId},#{proName},#{proNum},#{takePlace},#{takeTime},#{totalPrice},#{activityName})")
     void insert(OrderEntity order);
@@ -33,7 +46,7 @@ public interface OrderMapper {
     @Delete("DELETE FROM `order`WHERE user_id=#{userId} AND activity_name =#{activityName};")
     void delete(@Param("userId") String userId,@Param("activityName") String activityName );
 
-    @InsertProvider(type=OrderProvider.class,method = "insertAll")
-    void insertAll(@Param("getAll") List<OrderEntity> list);
+    @InsertProvider(type=OrderProvider.class,method = "insertList")
+    void insertList(@Param("getAll") List<OrderEntity> list);
 
 }

@@ -63,7 +63,7 @@ public class OrderService {
             HashMap<String,Integer> productMap = getProductMap();
             List<OrderEntity> userOrderList = orders.stream().filter(c->c.getUserId().equalsIgnoreCase(tmpOrder.getUserId())).collect(Collectors.toList());
             for (OrderEntity userOrder: userOrderList) {
-                productMap.put(userOrder.getProId(),userOrder.getProNum());
+                productMap.put(userOrder.getProName(),userOrder.getProNum());
                 totalPrice = totalPrice.add(userOrder.getTotalPrice());
             }
             orderDto.setProductMap(productMap);
@@ -74,11 +74,10 @@ public class OrderService {
     }
 
     private HashMap<String,Integer> getProductMap(){
-
         HashMap<String ,Integer> productMap = new HashMap<>();
         List<ProductEntity> productEntities = productMapper.getAllAvailable();
         for (ProductEntity tmpProduct : productEntities){
-            productMap.put(tmpProduct.getGuid(),0);
+            productMap.put(tmpProduct.getProName(),0);
         }
         return productMap;
     }

@@ -85,7 +85,7 @@ public class ProductController {
                         user.getUserId(),
                         pro.getProId(),
                         pro.getProName(),
-                        proNum, takePlace, takeTime, pro.getProPrice().multiply(new BigDecimal(proNum)),activityName);
+                        proNum, takePlace, takeTime, pro.getProPrice().multiply(new BigDecimal(proNum)),activityName,user.getIdNumber(),user.getName(),user.getCompany(),user.getDepartment());
                 odrList.add(orderEntity);
             }
         }

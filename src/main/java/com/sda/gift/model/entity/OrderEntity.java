@@ -22,4 +22,8 @@ public class OrderEntity {
     private String takeTime;
     private BigDecimal totalPrice;
     private String activityName;
+    private String idNumber;
+    private String userName;
+    private String company;
+    private String department;
 }

@@ -35,7 +35,9 @@ public interface OrderMapper {
             @Result(property = "takePlace", column = "take_place"),
             @Result(property = "takeTime", column = "take_time"),
             @Result(property = "totalPrice", column = "total_price"),
-            @Result(property = "activityName", column = "activity_name")
+            @Result(property = "activityName", column = "activity_name"),
+            @Result(property = "idNumber", column = "id_number"),
+            @Result(property = "userName", column = "user_name")
     })
     List<OrderEntity> queryAll();
 

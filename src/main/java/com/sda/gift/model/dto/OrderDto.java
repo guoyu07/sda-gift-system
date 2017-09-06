@@ -13,9 +13,9 @@ import java.util.HashMap;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
-    private String userNum;//员工编号
+    private String idNumber;//员工身份证号
     private String userName;//姓名
-    private String userId;//员工身份证号
+    private String userId;//员工编号
     private String department;//所属部门
     private String company;//所属单位
     private HashMap<String,Integer> productMap;//产品名称数量map

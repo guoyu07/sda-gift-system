@@ -76,8 +76,8 @@ public class OrderService {
     private HashMap<String,Integer> getProductMap(){
         HashMap<String ,Integer> productMap = new HashMap<>();
         List<ProductEntity> productEntities = productMapper.getAllAvailable();
-        for (ProductEntity tmpProduct : productEntities){
-            productMap.put(tmpProduct.getProName(),0);
+        for (ProductEntity tmpProduct : productEntities) {
+            productMap.put(tmpProduct.getProName(), 0);
         }
         return productMap;
     }

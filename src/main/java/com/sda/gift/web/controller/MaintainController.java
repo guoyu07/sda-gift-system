@@ -55,6 +55,7 @@ public class MaintainController {
     @PostMapping("/saveProduct")
     @ResponseBody
     public RestResult saveProduct(ProductEntity productEntity){
+        productEntity.setProId(productEntity.getGuid());
         productService.save(productEntity);
         return new RestResult(true,"更新成功",null,null);
     }

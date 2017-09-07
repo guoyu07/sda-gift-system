@@ -11,12 +11,11 @@
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/vendors/pnotify/dist/pnotify.css}"/>
     <link rel="stylesheet" th:href="@{/vendors/pnotify/dist/pnotify.brighttheme.css}"/>
-
     <style>
         .price{
             border-width:0;
-            width:1.5rem;
-            height:20px;
+            width:20%;
+            font-size:1.5rem;
             text-align: center;
         }
     </style>
@@ -27,12 +26,13 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <h3 th:if="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐，您可以重新选择额度不超过<span th:text="${quota}"></span>元的礼品!
-                </h3>
-                <h3 th:unless="${isChosed}" class="navbar-brand">
-                        <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐,请选择额度不超过<span  th:text="${quota}"></span>元的礼品!
-                </h3>
+                <div th:if="${isChosed}" class="navbar-brand">
+                    <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐，您可以重新选择额度不超过<span th:text="${quota}"></span>元的礼品!
+                </div>
+                <div th:unless="${isChosed}" class="navbar-brand">
+                    <span  th:text="${userName}"></span>,<span  th:text="${activityName}"></span>快乐,请选择额度不超过<span  th:text="${quota}"></span>元的礼品!
+                </div>
+                <!--<a class="navbar-brand" href="#">{{username}},欢迎您,祝您节日快乐!</a>-->
             </div>
         </div>
     </nav>
@@ -40,28 +40,28 @@
         <ul class="list-group">
             <div class="list-group-item active">
                 <div class="row">
-                    <div class="col-xs-5 text-left">
+                    <div class="col-xs-4 text-left">
                         名称
                     </div>
-                    <div class="col-xs-3 text-left">
+                    <div class="col-xs-2 text-left">
                         单价
                     </div>
-                    <div class="col-xs-4 text-center">
+                    <div class="col-xs-6 text-center">
                         数量
                     </div>
                 </div>
             </div>
             <form id="productForm">
                 <th:block th:each="product:${productList}">
-                    <li class="list-group-item">
+                    <li class="list-group-item" style="font-size: 1.5rem;">
                         <div class="row">
-                            <div class="col-xs-5 text-left">
+                            <div class="col-xs-4 text-left">
                                 <span th:text="${product.ProName}"></span>
                             </div>
                             <div class="col-xs-2 text-left">
                                 <span th:text="${product.ProPrice}"></span>
                             </div>
-                            <div class="col-xs-5 text-right">
+                            <div class="col-xs-6 text-right">
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="minus($(this))">-</button>
                                 <input type="text" class="price"  th:id="${product.proId}" th:name="${product.proId}" th:value="${product.proNum}"/>
                                 <button type="button" class="btn btn-default btn-sm" th:value="${product.ProPrice}" onclick="add($(this))">+</button>
@@ -70,14 +70,14 @@
                     </li>
                 </th:block>
 
-                <li class="list-group-item">
+                <li class="list-group-item" style="font-size: 1.5rem;">
                     <div class="row" style="line-height: 3rem">
                         <div class="col-xs-6 text-left">
                             请选择领取地点
                         </div>
 
                         <div class="col-xs-6 text-right" >
-                            <select class="form-control" id="takePlace" name="takePlace" style="height: 2rem;padding: 0">
+                            <select class="form-control" id="takePlace" name="takePlace">
                                 <option th:selected="${takePlace} == '济南'">济南</option>
                                 <option th:selected="${takePlace} == '青岛'">青岛</option>
                                 <option th:selected="${takePlace} == '烟台'">烟台</option>
@@ -86,14 +86,14 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item" style="font-size: 1.5rem;">
                     <div class="row"  style="line-height: 3rem">
                         <div class="col-xs-6 text-left">
-                            请选择领取时间段
+                            请选择领取时间
                         </div>
 
                         <div class="col-xs-6 text-right ">
-                            <select class="form-control" id="takeTime" name="takeTime" style="height: 2rem;padding: 0">
+                            <select class="form-control" id="takeTime" name="takeTime">
                                 <option th:selected="${takeTime} == '9月10日-20日'">9月10日-20日</option>
                                 <option th:selected="${takeTime} == '9月20日-30日'">9月20日-30日</option>
                                 <option th:selected="${takeTime} == '10月10日-20日'">10月10日-20日</option>
@@ -103,7 +103,7 @@
                     </div>
                     <!--</div>-->
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item" style="font-size: 1.5rem;">
                     <div class="row">
                         <div class="col-xs-6 text-left">
                             总价
@@ -114,10 +114,10 @@
                         </div>
                     </div>
                 </li>
-                <input type="button" onclick="chooseProduct()" value="提交" class="btn btn-warning btn-block btn-lg"/>
-
             </form>
         </ul>
+        <input type="button" onclick="chooseProduct()" value="提交" class="btn btn-warning btn-block btn-lg"/>
+
     </div>
 </div>
 </body>

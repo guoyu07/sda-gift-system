@@ -1,8 +1,10 @@
 package com.sda.gift.web.controller;
 
+import com.sda.gift.framework.cache.Cache;
 import com.sda.gift.model.entity.OrderEntity;
 import com.sda.gift.model.entity.ProductEntity;
 import com.sda.gift.model.entity.UserEntity;
+import com.sda.gift.web.exception.AuthenticationException;
 import com.sda.gift.web.exception.PriceException;
 import com.sda.gift.framework.cache.CacheManager;
 import com.sda.gift.framework.common.RestResult;
@@ -53,7 +55,7 @@ public class ProductController {
             for (OrderEntity order:odrs) {
                 ProductEntity pro = pros.stream().filter(c->c.getProId().equalsIgnoreCase(order.getProId())).findFirst().get();
                 pro.setProNum(order.getProNum());
-                totalPrice = totalPrice.add(order.getTotalPrice());
+                totalPrice = totalPrice.add(pro.getProPrice().multiply(new BigDecimal(order.getProNum())));
             }
             mv.addObject("takePlace",orderEntity.getTakePlace());
             mv.addObject("takeTime",orderEntity.getTakeTime());
@@ -74,6 +76,7 @@ public class ProductController {
         String takeTime = request.getParameter("takeTime");
         BigDecimal totalPrice = new BigDecimal(request.getParameter("totalPrice"));
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
+        checkClickNum(jwtToken);
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.getAllAvailable();
         List<OrderEntity> odrList = new ArrayList<>();
@@ -92,6 +95,23 @@ public class ProductController {
         checkPrice(odrList,totalPrice);
         orderService.saveOrder(odrList,user.getUserId(),activityName);
         return new RestResult(true,"礼品选择成功",null,null);
+    }
+
+    private void checkClickNum(String jwtToken) {
+        String clickStr = "clickNum"+jwtToken;
+        Cache clickNumCache = CacheManager.getCacheInfo(clickStr);
+        int clickNum=1;
+        if(clickNumCache==null){
+            CacheManager.putCacheInfo(clickStr,clickNum,1000*60*10);
+        }else{
+            clickNum = (int)clickNumCache.getValue();
+            clickNum++;
+        }
+        if(clickNum<3){
+            CacheManager.putCacheInfo(clickStr,clickNum,1000*60*10);
+        }else{
+            throw new AuthenticationException("请隔一段时间再提交！");
+        }
     }
 
     private void checkPrice(List<OrderEntity> orderEntities, BigDecimal totalPrice){

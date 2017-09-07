@@ -34,7 +34,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             response.sendRedirect("/login/");
             return false;
         }
-        CacheManager.putCacheInfo(jwtToken,user,1200);
+        CacheManager.putCacheInfo(jwtToken,user,1000*60*30);
         if(user.getUserId().equalsIgnoreCase("admin")){
             if(request.getServletPath().toLowerCase().contains("/maintain/")){
                 return true;

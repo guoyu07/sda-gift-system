@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0"/>
     <script th:src="@{/vendors/jquery/dist/jquery.js}"></script>
     <script th:src="@{/js/jquery.serializejson.js}"></script>
     <script th:src="@{/vendors/pnotify/dist/pnotify.js}"></script>
@@ -15,7 +15,7 @@
     <style>
         .price{
             border-width:0;
-            width:20px;
+            width:1.5rem;
             height:20px;
             text-align: center;
         }
@@ -71,12 +71,12 @@
                 </th:block>
 
                 <li class="list-group-item">
-                    <div class="row">
+                    <div class="row" style="line-height: 3rem">
                         <div class="col-xs-6 text-left">
                             请选择领取地点
                         </div>
 
-                        <div class="col-xs-6 text-right">
+                        <div class="col-xs-6 text-right" >
                             <select class="form-control" id="takePlace" name="takePlace" style="height: 2rem;padding: 0">
                                 <option th:selected="${takePlace} == '济南'">济南</option>
                                 <option th:selected="${takePlace} == '青岛'">青岛</option>
@@ -87,7 +87,7 @@
                     </div>
                 </li>
                 <li class="list-group-item">
-                    <div class="row">
+                    <div class="row"  style="line-height: 3rem">
                         <div class="col-xs-6 text-left">
                             请选择领取时间段
                         </div>
@@ -151,7 +151,8 @@
                 title: '对不起',
                 text: "不能超出额度"+quota,
                 type: 'error',
-                styling: 'bootstrap3'
+                styling: 'bootstrap3',
+                delay:3000
             });
             return false;
         }
@@ -165,14 +166,16 @@
                     title: '恭喜您',
                     text: response.message,
                     type: 'success',
-                    styling: 'bootstrap3'
+                    styling: 'bootstrap3',
+                    delay:3000
                 });
             }else{
                 new PNotify({
                     title: '对不起',
                     text: response.message,
                     type: 'error',
-                    styling: 'bootstrap3'
+                    styling: 'bootstrap3',
+                    delay:3000
                 });
             }
         });

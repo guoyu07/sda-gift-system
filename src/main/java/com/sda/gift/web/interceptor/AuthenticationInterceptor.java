@@ -39,6 +39,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             if(request.getServletPath().toLowerCase().contains("/maintain/")){
                 return true;
             }else{
+                response.sendRedirect("/login/");
                 return false;
             }
         }else if(StringUtils.isEmpty(user.getUserId())){
@@ -48,6 +49,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             if(request.getServletPath().toLowerCase().contains("/product/")){
                 return true;
             }else{
+                response.sendRedirect("/login/");
                 return false;
             }
         }

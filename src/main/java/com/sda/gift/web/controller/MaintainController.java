@@ -63,7 +63,6 @@ public class MaintainController {
     public void createExcel(HttpServletResponse response){
         List<OrderDto> list= orderService.getAll();//此为我要导出的数据，这里写你的要导出数据list
         HashMap<String,Integer> productMap = list.get(0).getProductMap();
-
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet sheet = wb.createSheet("股份工会2017“中秋”慰问品领取统计表");
         for(int i=0; i< productMap.size()+8; i++){
@@ -71,10 +70,8 @@ public class MaintainController {
         }
         HSSFRow row = sheet.createRow((int) 0);
         row.setHeightInPoints(20);
-        // 第四步，创建单元格，并设置值表头 设置表头居中
         HSSFCellStyle style = wb.createCellStyle();
         HSSFFont font=wb.createFont();
-        font.setColor(HSSFColor.RED.index);//HSSFColor.VIOLET.index //字体颜色
         style.setFont(font);
         style.setAlignment(HSSFCellStyle.ALIGN_LEFT);//居左
         int cellIndex=0;
@@ -98,16 +95,14 @@ public class MaintainController {
         cell.setCellValue("领取时间");
         cell = row.createCell((short) cellIndex);
         cell.setCellValue("物品总价");
-        for(int i=0;i<cell.getColumnIndex()+1;i++){//第一行每一个单元给样式
+        for(int i=0;i<cell.getColumnIndex()+1;i++){
             cell.getRow().getCell(i).setCellStyle(style);
         }
-        // 第五步，写入到excel
         for(int i=0;i<list.size();i++){
             cellIndex=0;
-            style = wb.createCellStyle();
+            wb.createCellStyle();
             row = sheet.createRow((int) i + 1);
             row.setHeightInPoints(20);
-            // 第四步，创建单元格，并设置值
             row.createCell((short) cellIndex++).setCellValue(list.get(i).getUserId());
             row.createCell((short) cellIndex++).setCellValue(list.get(i).getUserName());
             row.createCell((short) cellIndex++).setCellValue(list.get(i).getIdNumber());
@@ -120,12 +115,11 @@ public class MaintainController {
             row.createCell((short) cellIndex++).setCellValue(list.get(i).getTakeTime());
             row.createCell((short) cellIndex).setCellValue(list.get(i).getTotalPrice());
         }
-        // 第六步，将文件存到指定位置
         try
         {   //输出Excel文件
             OutputStream output=response.getOutputStream();
             response.reset();
-            response.setHeader("Content-disposition", "attachment; filename=gift.xls");
+            response.setHeader("Content-disposition", "attachment; filename=gift_statistics.xls");
             response.setContentType("application/msexcel");
             wb.write(output);
             output.close();

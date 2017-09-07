@@ -3,7 +3,7 @@ gift:
     quota: 1000
 spring:
   profiles:
-    active: "dev"
+    active: "pro"
   
 
 logging:

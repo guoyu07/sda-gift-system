@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,6 +43,8 @@ public class ProductController {
     private String activityName;
     @Value("${gift.quota}")
     private String quota;
+    @Value("${gift.pigId}")
+    private String pigId;
 
     @GetMapping("/")
     public ModelAndView product(HttpServletRequest request){
@@ -60,6 +64,8 @@ public class ProductController {
             mv.addObject("takePlace",orderEntity.getTakePlace());
             mv.addObject("takeTime",orderEntity.getTakeTime());
             mv.addObject("isChosed",true);
+        }else{
+            totalPrice=new BigDecimal(196);
         }
         mv.addObject("totalPrice",totalPrice);
         mv.addObject("userName",user.getName());
@@ -71,8 +77,8 @@ public class ProductController {
     @PostMapping("/chooseProduct")
     @ResponseBody
     public RestResult chooseProduct(HttpServletRequest request){
-
         String takePlace = request.getParameter("takePlace");
+        checkPig(request, takePlace);
         String takeTime = request.getParameter("takeTime");
         BigDecimal totalPrice = new BigDecimal(request.getParameter("totalPrice"));
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
@@ -95,6 +101,16 @@ public class ProductController {
         checkPrice(odrList,totalPrice);
         orderService.saveOrder(odrList,user.getUserId(),activityName);
         return new RestResult(true,"礼品选择成功",null,null);
+    }
+
+    private void checkPig(HttpServletRequest request, String takePlace) {
+        int pigNum = Integer.parseInt(request.getParameter(pigId));
+        if(pigNum>0){
+            String[] pigPlaceArr = {"济南","青岛","烟台","北京","上海"};
+            if(!Arrays.asList(pigPlaceArr).contains(takePlace)){
+                throw new AuthenticationException("黑猪肉仅限济南，青岛，烟台，北京，上海领取！");
+            }
+        }
     }
 
     private void checkClickNum(String jwtToken) {

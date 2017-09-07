@@ -1,6 +1,8 @@
 gift:
     activityName: "中秋节"
     quota: 1000
+    pigId: "e08b8190684f438db922580bc42a7d8f"
+
 spring:
   profiles:
     active: "pro"

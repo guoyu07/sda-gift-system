@@ -1,5 +1,6 @@
 package com.sda.gift.web.controller;
 
+import com.sda.gift.framework.tool.GuidGenerator;
 import com.sda.gift.model.dto.OrderDto;
 import com.sda.gift.model.entity.OrderEntity;
 import com.sda.gift.model.entity.ProductEntity;
@@ -48,6 +49,8 @@ public class MaintainController {
     @PostMapping("/addProduct")
     @ResponseBody
     public RestResult addProduct(ProductEntity productEntity){
+        productEntity.setGuid(GuidGenerator.newGuid());
+        productEntity.setProId(productEntity.getGuid());
         productService.add(productEntity);
         return new RestResult(true,"添加产品成功",null,null);
     }

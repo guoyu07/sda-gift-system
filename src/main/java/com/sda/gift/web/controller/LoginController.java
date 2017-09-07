@@ -1,5 +1,6 @@
 package com.sda.gift.web.controller;
 
+import com.sda.gift.framework.common.RestResult;
 import com.sda.gift.model.entity.UserEntity;
 import com.sda.gift.web.exception.AuthenticationException;
 import com.sda.gift.framework.tool.JwtTool;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,8 @@ public class LoginController {
     public String login(){
         return "login";
     }
+
+
     @PostMapping("/doLogin")
     public String doLogin(String userId, String password, HttpServletResponse response){
         UserEntity user = userService.checkAccount(userId, password);
@@ -45,5 +49,15 @@ public class LoginController {
             return "redirect:/maintain/";
         }
         return "redirect:/product/";
+    }
+
+    @PostMapping("/check")
+    @ResponseBody
+    public RestResult doCheck(String userId, String password){
+        UserEntity user = userService.checkAccount(userId, password);
+        if(null==user){
+            throw new AuthenticationException("用户认证失败！");
+        }
+        return new RestResult(true,"登录成功",null,null);
     }
 }

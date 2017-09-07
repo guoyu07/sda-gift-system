@@ -17,7 +17,7 @@
         工会礼品选择系统
     </div>
     <div class="container" style="margin-top: 1rem">
-        <form action="/login/doLogin" method="post">
+        <form id="loginForm" action="/login/doLogin" method="post"  onsubmit="return check()">
             <div class="input-group">
                 <label class="input-group-addon">工号</label>
                 <input type="text" id="userId" name="userId" class="form-control input-lg" placeholder="6位工号"/>
@@ -33,4 +33,23 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    
+    function check() {
+        var formData = $("#loginForm").serialize();
+        $.post('/login/check',formData,function (response) {
+            if(response.success==false){
+                new PNotify({
+                    title: '对不起',
+                    text: response.message,
+                    type: 'error',
+                    styling: 'bootstrap3',
+                    delay:3000
+                });
+                return false;
+            }
+        })
+        
+    }
+</script>
 </html>

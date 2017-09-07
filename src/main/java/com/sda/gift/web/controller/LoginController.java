@@ -34,7 +34,7 @@ public class LoginController {
 
 
     @PostMapping("/doLogin")
-    public String doLogin(String userId, String password, HttpServletResponse response){
+    public void doLogin(String userId, String password, HttpServletResponse response){
         UserEntity user = userService.checkAccount(userId, password);
         if(null==user){
             throw new AuthenticationException("用户认证失败！");
@@ -45,10 +45,6 @@ public class LoginController {
         tokenCookie.setHttpOnly(true);
         tokenCookie.setPath("/");
         response.addCookie(tokenCookie);
-        if(userId.equalsIgnoreCase("admin")){
-            return "redirect:/maintain/";
-        }
-        return "redirect:/product/";
     }
 
     @PostMapping("/check")

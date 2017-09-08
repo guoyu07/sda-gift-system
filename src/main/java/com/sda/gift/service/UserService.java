@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * Created by Allen on 2017/8/24.
  */
@@ -23,9 +25,11 @@ public class UserService {
         if(userId.equalsIgnoreCase("admin") && password.equalsIgnoreCase("%&TUGUR&^T*&IHKJKJG")){
             return new UserEntity("admin");
         }
-        UserEntity user = userMapper.select(userId);
-        if(user.getIdNumber().substring(12).equalsIgnoreCase(password)){
-            return user;
+        List<UserEntity> users = userMapper.select(userId);
+        for (UserEntity user:users) {
+            if(user.getIdNumber().substring(12).equalsIgnoreCase(password)){
+                return user;
+            }
         }
         return null;
     }

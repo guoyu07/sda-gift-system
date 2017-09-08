@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Allen on 2017/8/25.
  */
@@ -17,6 +19,6 @@ public interface UserMapper {
             @Result(property = "userId",  column = "user_id"),
             @Result(property = "idNumber", column = "id_number"),
     })
-    UserEntity select(String userId);
+    List<UserEntity> select(String userId);
 
 }

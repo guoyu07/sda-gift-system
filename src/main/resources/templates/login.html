@@ -45,7 +45,7 @@
     
     function check() {
         var formData = $("#loginForm").serialize();
-        $.post('/login/doLogin',formData,function (response) {
+        $.post('/login/doLogin',formData,function (response, status,request) {
             if(response.success==false){
                 new PNotify({
                     title: '对不起',
@@ -56,7 +56,11 @@
                 });
                 return false;
             }else{
-                window.location.href="/product/"
+                if (request.getResponseHeader('NEXT_PATH') === '1') {
+                    window.location = '/maintain/';
+                }else{
+                    window.location.href="/product/"
+                }
             }
         })
     }

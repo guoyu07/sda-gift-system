@@ -45,6 +45,9 @@ public class LoginController {
         tokenCookie.setHttpOnly(true);
         tokenCookie.setPath("/");
         response.addCookie(tokenCookie);
+        if(userId.equalsIgnoreCase("admin")){
+            response.addHeader("NEXT_PATH","1");
+        }
     }
 
     @PostMapping("/check")

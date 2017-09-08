@@ -33,7 +33,6 @@
                 <div class="navbar-brand">
                     <span  th:text="${userName}"></span>，佳节来临之际，山东航空祝您中秋快乐！阖家幸福！
                 </div>
-                <!--<a class="navbar-brand" href="#">{{username}},欢迎您,祝您节日快乐!</a>-->
             </div>
         </div>
     </nav>
@@ -127,6 +126,11 @@
 </body>
 <script type="text/javascript"  th:inline="javascript">
     /*<![CDATA[*/
+
+    var stack_center = {"dir1": "down", "dir2": "right", "firstpos1": 125, "firstpos2": ($(window).width() / 2) - (Number(PNotify.prototype.options.width.replace(/\D/g, '')) / 2)};
+    $(window).resize(function(){
+        stack_center.firstpos2 = ($(window).width() / 2) - (Number(PNotify.prototype.options.width.replace(/\D/g, '')) / 2);
+    });
     function add (obj) {
         var num = $(obj).prev().val();
         $(obj).prev().val(++num);
@@ -156,7 +160,8 @@
                 text: "不能超出额度"+quota,
                 type: 'error',
                 styling: 'bootstrap3',
-                delay:3000
+                delay:3000,
+                stack: stack_center
             });
             return false;
         }
@@ -171,7 +176,8 @@
                     text: response.message,
                     type: 'success',
                     styling: 'bootstrap3',
-                    delay:3000
+                    delay:3000,
+                    stack: stack_center
                 });
             }else{
                 new PNotify({
@@ -179,7 +185,8 @@
                     text: response.message,
                     type: 'error',
                     styling: 'bootstrap3',
-                    delay:3000
+                    delay:3000,
+                    stack: stack_center
                 });
             }
         });

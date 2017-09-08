@@ -1,5 +1,6 @@
 package com.sda.gift.web.controller;
 
+import com.sda.gift.config.GiftConfig;
 import com.sda.gift.framework.cache.Cache;
 import com.sda.gift.model.entity.OrderEntity;
 import com.sda.gift.model.entity.ProductEntity;
@@ -39,12 +40,8 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private OrderService orderService;
-    @Value("${gift.activityName}")
-    private String activityName;
-    @Value("${gift.quota}")
-    private String quota;
-    @Value("${gift.pigId}")
-    private String pigId;
+    @Autowired
+    private GiftConfig giftConfig;
 
     @GetMapping("/")
     public ModelAndView product(HttpServletRequest request){
@@ -52,7 +49,7 @@ public class ProductController {
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.getAllAvailable();
-        List<OrderEntity> odrs = orderService.getOrder(user.getUserId(),activityName);
+        List<OrderEntity> odrs = orderService.getOrder(user.getUserId(),giftConfig.getActivityName());
         BigDecimal totalPrice = BigDecimal.ZERO;
         if(odrs.size()>0){
             OrderEntity orderEntity = odrs.get(0);
@@ -69,8 +66,8 @@ public class ProductController {
         }
         mv.addObject("totalPrice",totalPrice);
         mv.addObject("userName",user.getName());
-        mv.addObject("quota",quota);
-        mv.addObject("activityName",activityName);
+        mv.addObject("quota",giftConfig.getQuota());
+        mv.addObject("activityName",giftConfig.getActivityName());
         mv.addObject("productList",pros);
         return mv;
     }
@@ -78,11 +75,11 @@ public class ProductController {
     @ResponseBody
     public RestResult chooseProduct(HttpServletRequest request){
         String takePlace = request.getParameter("takePlace");
-        checkPig(request, takePlace);
+        checkPig(request, takePlace);//校验黑猪肉只能济南，青岛，烟台，北京，上海领取
         String takeTime = request.getParameter("takeTime");
         BigDecimal totalPrice = new BigDecimal(request.getParameter("totalPrice"));
         String jwtToken = CookieTool.getCookieValue(request,"accessToken");
-        checkClickNum(jwtToken);
+        checkClickNum(jwtToken);//限制点击次数
         UserEntity user = (UserEntity)CacheManager.getCacheInfo(jwtToken).getValue();
         List<ProductEntity> pros = productService.getAllAvailable();
         List<OrderEntity> odrList = new ArrayList<>();
@@ -94,20 +91,19 @@ public class ProductController {
                         user.getUserId(),
                         pro.getProId(),
                         pro.getProName(),
-                        proNum, takePlace, takeTime, pro.getProPrice().multiply(new BigDecimal(proNum)),activityName,user.getIdNumber(),user.getName(),user.getCompany(),user.getDepartment());
+                        proNum, takePlace, takeTime, pro.getProPrice().multiply(new BigDecimal(proNum)),giftConfig.getActivityName(),user.getIdNumber(),user.getName(),user.getCompany(),user.getDepartment());
                 odrList.add(orderEntity);
             }
         }
         checkPrice(odrList,totalPrice);
-        orderService.saveOrder(odrList,user.getUserId(),activityName);
-        return new RestResult(true,"礼品选择成功",null,null);
+        orderService.saveOrder(odrList,user.getUserId(),giftConfig.getActivityName());
+        return new RestResult(true,"提交成功",null,null);
     }
 
     private void checkPig(HttpServletRequest request, String takePlace) {
-        int pigNum = Integer.parseInt(request.getParameter(pigId));
+        int pigNum = Integer.parseInt(request.getParameter(giftConfig.getPigId()));
         if(pigNum>0){
-            String[] pigPlaceArr = {"济南","青岛","烟台","北京","上海"};
-            if(!Arrays.asList(pigPlaceArr).contains(takePlace)){
+            if(!giftConfig.getPigPlace().contains(takePlace)){
                 throw new AuthenticationException("黑猪肉仅限济南，青岛，烟台，北京，上海领取！");
             }
         }
@@ -138,7 +134,7 @@ public class ProductController {
         if(addResult.compareTo(totalPrice)!=0){
             throw new PriceException("金额有误，请不要搞鬼！");
         }
-        if(totalPrice.compareTo(new BigDecimal(quota))==1){
+        if(totalPrice.compareTo(new BigDecimal(giftConfig.getQuota()))==1){
             throw new PriceException("超出额度，请重新选择！");
         }
     }

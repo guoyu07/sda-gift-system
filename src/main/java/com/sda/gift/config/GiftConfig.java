@@ -17,5 +17,6 @@ public class GiftConfig {
     private String activityName;
     private int quota;
     private String pigId;
-    private List<String> pigPlace=new ArrayList<>();
+    private List<String> pigPlace;
+    private int requestNum;//10分钟内请求次数限制
 }
